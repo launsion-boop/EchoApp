@@ -1,0 +1,11 @@
+{
+  "schema": "echoapp-preinstalled/v1",
+  "updated_at": "2026-04-27T00:00:00Z",
+  "apps": [
+    {
+      "id": "oar",
+      "owner": "official",
+      "path": "apps/official/oar/app.json"
+    }
+  ]
+}
