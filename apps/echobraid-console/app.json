@@ -1,0 +1,37 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.echobraid-console",
+  "name": {
+    "zh-CN": "EchoBraid 控制台",
+    "en": "EchoBraid Console"
+  },
+  "version": "0.6.8",
+  "category": "developer-tools",
+  "summary": {
+    "zh-CN": "查看 EchoBraid 本机状态的只读控制台",
+    "en": "Read-only console for local EchoBraid status"
+  },
+  "description": {
+    "zh-CN": "只读控制台，用来查看 EchoBraid 的当前 AI、定时任务、现有 skills、核心文件和 L3/L2 记忆。",
+    "en": "A read-only console for the active AI, EchoBraid skills, scheduled tasks, system files, and L3/L2 memories on this computer."
+  },
+  "tags": [
+    "console",
+    "developer",
+    "diagnostics",
+    "echoagent"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/echobraid-console/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "echoagent_invoke"
+  ],
+  "updated_at": "2026-04-28T11:43:26Z",
+  "changelog": "changelog.md"
+}

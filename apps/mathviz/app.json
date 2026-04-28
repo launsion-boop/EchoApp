@@ -1,0 +1,34 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.mathviz",
+  "name": {
+    "zh-CN": "数学动画平台",
+    "en": "Math Animation Lab"
+  },
+  "version": "1.0.0",
+  "category": "education",
+  "summary": {
+    "zh-CN": "交互式数学动画演示",
+    "en": "Interactive math animation demos"
+  },
+  "description": {
+    "zh-CN": "交互式数学动画平台，涵盖基础函数、微积分、特殊曲线与几何演示。",
+    "en": "An interactive math animation platform covering functions, calculus, special curves, and geometry demos."
+  },
+  "tags": [
+    "math",
+    "animation",
+    "education",
+    "visualization"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/mathviz/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [],
+  "updated_at": "2026-04-28T11:43:26Z",
+  "changelog": "changelog.md"
+}

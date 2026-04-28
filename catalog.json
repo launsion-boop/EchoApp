@@ -1,14 +1,34 @@
 {
   "schema": "echoapp-catalog/v1",
-  "updated_at": "2026-04-28T04:21:00Z",
+  "updated_at": "2026-04-28T11:43:26Z",
   "apps": [
+    {
+      "id": "app.local.earth-garden",
+      "path": "apps/earth-garden/app.json"
+    },
+    {
+      "id": "app.local.echobraid-console",
+      "path": "apps/echobraid-console/app.json"
+    },
+    {
+      "id": "echorec",
+      "path": "apps/echorec/app.json"
+    },
+    {
+      "id": "app.local.juicy-snake",
+      "path": "apps/juicy-snake/app.json"
+    },
+    {
+      "id": "app.local.mathviz",
+      "path": "apps/mathviz/app.json"
+    },
     {
       "id": "app.local.oar",
       "path": "apps/oar/app.json"
     },
     {
-      "id": "echorec",
-      "path": "apps/echorec/app.json"
+      "id": "APP-A262",
+      "path": "apps/web-extractor/app.json"
     }
   ]
 }

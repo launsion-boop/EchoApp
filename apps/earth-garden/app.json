@@ -1,0 +1,34 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.earth-garden",
+  "name": {
+    "zh-CN": "如果地球是一座花园",
+    "en": "Earth Garden"
+  },
+  "version": "4.5.0",
+  "category": "education",
+  "summary": {
+    "zh-CN": "3D 全球植物地图",
+    "en": "Interactive 3D global plant map"
+  },
+  "description": {
+    "zh-CN": "展示 301 种植物物种真实坐标的 3D 交互式全球植物地图，包含天气特效、极光和地形可视化。",
+    "en": "Explore a 3D interactive globe with real coordinates for 301 plant species, weather effects, aurora visuals, and terrain visualization."
+  },
+  "tags": [
+    "plants",
+    "globe",
+    "education",
+    "3d"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/earth-garden/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [],
+  "updated_at": "2026-04-28T11:43:26Z",
+  "changelog": "changelog.md"
+}

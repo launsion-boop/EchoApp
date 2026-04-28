@@ -1,0 +1,37 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "APP-A262",
+  "name": {
+    "zh-CN": "网页资源提取器",
+    "en": "Web Resource Extractor"
+  },
+  "version": "0.8.3",
+  "category": "utilities",
+  "summary": {
+    "zh-CN": "提取网页里的图片、视频、文档和链接",
+    "en": "Extract images, media, documents, and links from web pages"
+  },
+  "description": {
+    "zh-CN": "输入网址，解析页面里的图片、视频、音频、PDF、文档、链接等资源并可下载。通过 Desktop bridge fetch 绕过浏览器 CORS 限制。",
+    "en": "Enter a URL to parse downloadable page resources such as images, video, audio, PDFs, documents, and links via the Desktop bridge fetch path."
+  },
+  "tags": [
+    "web",
+    "extractor",
+    "download",
+    "resources"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/web-extractor/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "network",
+    "filesystem"
+  ],
+  "updated_at": "2026-04-28T11:43:26Z",
+  "changelog": "changelog.md"
+}

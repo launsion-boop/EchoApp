@@ -1,0 +1,37 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.juicy-snake",
+  "name": {
+    "zh-CN": "Juicy Snake",
+    "en": "Juicy Snake"
+  },
+  "version": "1.0.0",
+  "category": "games",
+  "summary": {
+    "zh-CN": "霓虹风格贪吃蛇游戏",
+    "en": "Neon arcade snake game"
+  },
+  "description": {
+    "zh-CN": "赛博朋克风格的贪吃蛇游戏，拥有霓虹发光视觉效果、连击系统和丰富特效。",
+    "en": "A cyberpunk-style snake game with neon visuals, combo scoring, and lively effects."
+  },
+  "tags": [
+    "game",
+    "snake",
+    "arcade",
+    "neon"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/juicy-snake/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "audio",
+    "storage"
+  ],
+  "updated_at": "2026-04-28T11:43:26Z",
+  "changelog": "changelog.md"
+}
