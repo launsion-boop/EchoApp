@@ -1,0 +1,43 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.oar",
+  "name": {
+    "zh-CN": "OAR",
+    "en": "OAR"
+  },
+  "version": "1.1.1",
+  "category": "productivity",
+  "summary": {
+    "zh-CN": "团队目标管理与协作工具",
+    "en": "Team OKR management and collaboration"
+  },
+  "description": {
+    "zh-CN": "用于团队目标拆解、进度跟踪、局域网协作和 AI 辅助分析。",
+    "en": "Manage team goals, track progress, collaborate over LAN, and analyze work with AI assistance."
+  },
+  "tags": [
+    "okr",
+    "team",
+    "collaboration",
+    "ai"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/oar/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "database",
+    "lan_network",
+    "notification",
+    "background_task",
+    "auth",
+    "network",
+    "echoagent_invoke",
+    "echoagent_event"
+  ],
+  "updated_at": "2026-04-28T00:00:00Z",
+  "changelog": "changelog.md"
+}

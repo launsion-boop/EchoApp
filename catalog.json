@@ -1,0 +1,10 @@
+{
+  "schema": "echoapp-catalog/v1",
+  "updated_at": "2026-04-28T00:00:00Z",
+  "apps": [
+    {
+      "id": "app.local.oar",
+      "path": "apps/oar/app.json"
+    }
+  ]
+}

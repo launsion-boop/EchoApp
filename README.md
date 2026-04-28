@@ -1,37 +1,35 @@
 # EchoApp
 
-EchoApp is the GitHub update source for EchoBraid preinstalled apps.
+EchoApp is an open GitHub catalog and update source for EchoBraid apps.
 
-First slice scope:
+Scope:
 
-- Keep a small list of EchoBraid preinstalled apps.
+- List installable EchoBraid apps in `catalog.json`.
 - Store each app as `app.json` + `app.echo` + human-readable notes.
-- Accept updates through pull requests.
-- Let EchoBraid clients check installed preloaded apps for newer versions.
-
-This is not an app store yet. There is no public browse/install marketplace in the first version.
+- Accept app additions and updates through pull requests.
+- Let EchoBraid clients discover apps, install `.echo` artifacts, and later check installed apps for newer versions.
 
 ## Layout
 
 ```text
-preinstalled.json
+catalog.json
 apps/
-  official/
-    oar/
-      app.json
-      app.echo
-      README.md
-      changelog.md
+  oar/
+    app.json
+    app.echo
+    README.md
+    changelog.md
 scripts/
   validate.js
 ```
 
-## Updating A Preinstalled App
+## Adding Or Updating An App
 
-1. Replace `apps/official/<app>/app.echo`.
-2. Update `apps/official/<app>/app.json`.
+1. Add or replace `apps/<app>/app.echo`.
+2. Update `apps/<app>/app.json`.
 3. Add a short entry to `changelog.md`.
-4. Run `node scripts/validate.js`.
-5. Open a pull request.
+4. Ensure `catalog.json` points to the app's `app.json`.
+5. Run `node scripts/validate.js`.
+6. Open a pull request.
 
-The client reads `update_source` from the app metadata and only caches local runtime state such as installed version and last check time.
+The client reads `catalog.json` for discovery. After installation, it reads `update_source` from the app metadata and only caches local runtime state such as installed version and last check time.

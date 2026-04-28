@@ -6,7 +6,7 @@
 
 - App:
 - Version:
-- Change type: preinstalled update
+- Change type: new app / app update / catalog metadata
 
 ## Validation
 

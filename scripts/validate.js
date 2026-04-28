@@ -34,6 +34,19 @@ function requireString(object, field, context) {
   return object[field];
 }
 
+function requireLocalizedString(object, field, context) {
+  const value = object[field];
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    fail(`${context}.${field} must be a localized object`);
+    return;
+  }
+  for (const locale of ['zh-CN', 'en']) {
+    if (typeof value[locale] !== 'string' || value[locale].length === 0) {
+      fail(`${context}.${field}.${locale} must be a non-empty string`);
+    }
+  }
+}
+
 function compareSemver(a, b) {
   const parse = (value) => value.split(/[+-]/)[0].split('.').map((part) => Number(part));
   const left = parse(a);
@@ -140,7 +153,7 @@ function validateZipEchoFile(echoPath, app) {
 function validateApp(appEntry) {
   const appJsonPath = join(ROOT, appEntry.path);
   if (!existsSync(appJsonPath)) {
-    fail(`preinstalled path does not exist: ${appEntry.path}`);
+    fail(`catalog path does not exist: ${appEntry.path}`);
     return;
   }
 
@@ -149,20 +162,23 @@ function validateApp(appEntry) {
 
   const context = appEntry.path;
   const id = requireString(app, 'id', context);
-  requireString(app, 'name', context);
+  requireLocalizedString(app, 'name', context);
   const version = requireString(app, 'version', context);
-  requireString(app, 'owner', context);
-  requireString(app, 'description', context);
+  requireString(app, 'category', context);
+  requireLocalizedString(app, 'summary', context);
+  requireLocalizedString(app, 'description', context);
   requireString(app, 'echo_file', context);
   requireString(app, 'min_echobraid', context);
   requireString(app, 'updated_at', context);
   requireString(app, 'changelog', context);
 
   if (app.schema !== 'echoapp-app/v1') fail(`${context}.schema must be echoapp-app/v1`);
-  if (id !== appEntry.id) fail(`${context}.id must match preinstalled id ${appEntry.id}`);
-  if (app.owner !== appEntry.owner) fail(`${context}.owner must match preinstalled owner ${appEntry.owner}`);
+  if (id !== appEntry.id) fail(`${context}.id must match catalog id ${appEntry.id}`);
   if (!SEMVER_RE.test(version)) fail(`${context}.version must be semver, got ${version}`);
   if (!Array.isArray(app.capabilities)) fail(`${context}.capabilities must be an array`);
+  if (!Array.isArray(app.tags) || app.tags.some((tag) => typeof tag !== 'string' || tag.length === 0)) {
+    fail(`${context}.tags must be an array of non-empty strings`);
+  }
 
   const source = app.update_source;
   if (!source || typeof source !== 'object') {
@@ -186,27 +202,26 @@ function validateApp(appEntry) {
 }
 
 function main() {
-  const indexPath = join(ROOT, 'preinstalled.json');
+  const indexPath = join(ROOT, 'catalog.json');
   const index = readJson(indexPath);
   if (!index) return;
 
-  if (index.schema !== 'echoapp-preinstalled/v1') fail('preinstalled.json schema must be echoapp-preinstalled/v1');
-  if (typeof index.updated_at !== 'string' || index.updated_at.length === 0) fail('preinstalled.json updated_at is required');
+  if (index.schema !== 'echoapp-catalog/v1') fail('catalog.json schema must be echoapp-catalog/v1');
+  if (typeof index.updated_at !== 'string' || index.updated_at.length === 0) fail('catalog.json updated_at is required');
   if (!Array.isArray(index.apps)) {
-    fail('preinstalled.json apps must be an array');
+    fail('catalog.json apps must be an array');
     return;
   }
 
   const seen = new Set();
   for (const entry of index.apps) {
     if (!entry || typeof entry !== 'object') {
-      fail('preinstalled apps entries must be objects');
+      fail('catalog apps entries must be objects');
       continue;
     }
-    const id = requireString(entry, 'id', 'preinstalled app');
-    requireString(entry, 'owner', `preinstalled app ${id}`);
-    const path = requireString(entry, 'path', `preinstalled app ${id}`);
-    if (seen.has(id)) fail(`duplicate preinstalled app id: ${id}`);
+    const id = requireString(entry, 'id', 'catalog app');
+    const path = requireString(entry, 'path', `catalog app ${id}`);
+    if (seen.has(id)) fail(`duplicate catalog app id: ${id}`);
     seen.add(id);
     validateApp(entry);
   }
@@ -215,7 +230,7 @@ function main() {
     console.error('EchoApp validation failed');
     process.exit(process.exitCode);
   }
-  console.log(`EchoApp validation passed (${index.apps.length} app${index.apps.length === 1 ? '' : 's'})`);
+  console.log(`EchoApp catalog validation passed (${index.apps.length} app${index.apps.length === 1 ? '' : 's'})`);
 }
 
 main();

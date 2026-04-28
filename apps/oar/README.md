@@ -1,6 +1,6 @@
 # OAR
 
-OAR is an EchoBraid preinstalled app for team OKR management, LAN collaboration, and AI-assisted analysis.
+OAR is an EchoBraid app for team OKR management, LAN collaboration, and AI-assisted analysis.
 
 ## Update Source
 
@@ -8,7 +8,7 @@ OAR is an EchoBraid preinstalled app for team OKR management, LAN collaboration,
 {
   "type": "github",
   "repo": "launsion-boop/EchoApp",
-  "app_path": "apps/official/oar/app.json"
+  "app_path": "apps/oar/app.json"
 }
 ```
 
