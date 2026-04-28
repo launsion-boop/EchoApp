@@ -1,0 +1,43 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "echorec",
+  "name": {
+    "zh-CN": "EchoREC",
+    "en": "EchoREC"
+  },
+  "version": "0.1.28",
+  "category": "productivity",
+  "summary": {
+    "zh-CN": "AI 会议速记与研究派发",
+    "en": "AI meeting transcription with research dispatch"
+  },
+  "description": {
+    "zh-CN": "实时录音流式转写 + 服务端声纹聚类区分说话人 + 滚动窗口总结要点 + 自动识别研究任务并派发给 EchoAgent 执行。",
+    "en": "Real-time streaming transcription, speaker diarization via voiceprint clustering, rolling-window summarization, and automatic research-task dispatch to EchoAgent."
+  },
+  "tags": [
+    "meeting",
+    "transcription",
+    "asr",
+    "ai"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/echorec/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "storage",
+    "network",
+    "database",
+    "audio",
+    "microphone",
+    "echoagent_invoke",
+    "filesystem"
+  ],
+  "updated_at": "2026-04-28T04:21:00Z",
+  "changelog": "changelog.md"
+}
