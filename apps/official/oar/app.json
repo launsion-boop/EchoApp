@@ -2,7 +2,7 @@
   "schema": "echoapp-app/v1",
   "id": "oar",
   "name": "OAR",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "owner": "official",
   "category": "productivity",
   "description": "Team OKR management with LAN collaboration and AI-assisted analysis.",
@@ -23,6 +23,6 @@
     "echoagent_invoke",
     "echoagent_event"
   ],
-  "updated_at": "2026-04-27T00:00:00Z",
+  "updated_at": "2026-04-28T00:00:00Z",
   "changelog": "changelog.md"
 }
