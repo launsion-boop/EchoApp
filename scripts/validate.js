@@ -75,7 +75,10 @@ function validateEchoFile(appDir, app, context) {
   }
 
   const isZip = bytes.length >= 4 && bytes[0] === 0x50 && bytes[1] === 0x4b && bytes[2] === 0x03 && bytes[3] === 0x04;
-  if (isZip) return;
+  if (isZip) {
+    validateZipEchoFile(echoPath, app);
+    return;
+  }
 
   let parsed;
   try {
@@ -88,6 +91,37 @@ function validateEchoFile(appDir, app, context) {
   const manifest = parsed && parsed.manifest;
   if (!manifest || typeof manifest !== 'object') {
     fail(`${relative(echoPath)} legacy JSON .echo must contain manifest`);
+    return;
+  }
+  if (manifest.id !== app.id) {
+    fail(`${relative(echoPath)} manifest.id (${manifest.id}) must match app.json id (${app.id})`);
+  }
+  if (manifest.version !== app.version) {
+    fail(`${relative(echoPath)} manifest.version (${manifest.version}) must match app.json version (${app.version})`);
+  }
+
+  const source = manifest.update_source;
+  if (!source || source.type !== 'github' || source.repo !== REPO || source.app_path !== app.update_source.app_path) {
+    fail(`${relative(echoPath)} manifest.update_source must match app.json update_source`);
+  }
+}
+
+function validateZipEchoFile(echoPath, app) {
+  let manifest;
+  try {
+    const raw = execFileSync('unzip', ['-p', echoPath, 'manifest.json'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+    manifest = JSON.parse(raw);
+  } catch (error) {
+    fail(`${relative(echoPath)} V2 ZIP must contain valid manifest.json: ${error.message}`);
+    return;
+  }
+
+  if (!manifest || typeof manifest !== 'object') {
+    fail(`${relative(echoPath)} V2 ZIP manifest.json must be a JSON object`);
     return;
   }
   if (manifest.id !== app.id) {
