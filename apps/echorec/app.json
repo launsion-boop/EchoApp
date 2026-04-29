@@ -1,6 +1,6 @@
 {
   "schema": "echoapp-app/v1",
-  "id": "echorec",
+  "id": "app.local.echorec",
   "name": {
     "zh-CN": "EchoREC",
     "en": "EchoREC"

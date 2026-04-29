@@ -11,7 +11,7 @@
       "path": "apps/echobraid-console/app.json"
     },
     {
-      "id": "echorec",
+      "id": "app.local.echorec",
       "path": "apps/echorec/app.json"
     },
     {
