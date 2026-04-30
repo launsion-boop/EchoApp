@@ -1,0 +1,39 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "xiaozhi",
+  "name": {
+    "zh-CN": "小智",
+    "en": "Xiaozhi"
+  },
+  "version": "0.8.6",
+  "category": "productivity",
+  "summary": {
+    "zh-CN": "管理 xiaozhi.me 智能体、设备、音色与对话历史",
+    "en": "Manage xiaozhi.me agents, devices, voices, and chat history"
+  },
+  "description": {
+    "zh-CN": "封装 xiaozhi.me 控制台 API，管理智能体、设备、音色与对话历史；内置会话助手，支持自然语言操作。",
+    "en": "Wraps the xiaozhi.me console API to manage agents, devices, voices, and chat history. Includes an in-app assistant for natural-language operations."
+  },
+  "tags": [
+    "xiaozhi",
+    "agent",
+    "iot",
+    "ai"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/xiaozhi/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "network",
+    "storage",
+    "echoagent_invoke"
+  ],
+  "updated_at": "2026-04-30T16:30:00Z",
+  "changelog": "changelog.md"
+}

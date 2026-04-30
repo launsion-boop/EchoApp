@@ -37,6 +37,10 @@
     {
       "id": "APP-A262",
       "path": "apps/web-extractor/app.json"
+    },
+    {
+      "id": "xiaozhi",
+      "path": "apps/xiaozhi/app.json"
     }
   ]
 }
