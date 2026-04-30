@@ -1,0 +1,40 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.echo-console",
+  "name": {
+    "zh-CN": "Echo控制台",
+    "en": "Echo Console"
+  },
+  "version": "1.1.2",
+  "category": "developer-tools",
+  "summary": {
+    "zh-CN": "暗黑科技风的 EchoBraid 中控大屏",
+    "en": "Dark sci-fi central-control HUD for EchoBraid"
+  },
+  "description": {
+    "zh-CN": "Echo 控制台是面向桌面的单屏中控大屏。HUD 风格汇集当前 AI、定时任务、L3·L2 记忆、SKILL、核心文件 5 张 KPI；点击任意 KPI 可切换左侧大面板（记忆星图 / 定时任务列表 / AI 详情 / 能力清单 / 核心文件）。右侧常驻主题地块、时间流和实时事件流。",
+    "en": "Echo Console is a single-screen, dark sci-fi HUD that surfaces EchoBraid's current AI, schedules, L3/L2 memories, skills and core files in five clickable KPI tiles. Each tile swaps the left stage between the memory constellation, schedule list, AI detail, skill catalog and core-file list while topic matrix, timeline and pulse feed stay docked on the right."
+  },
+  "tags": [
+    "console",
+    "dashboard",
+    "developer",
+    "diagnostics",
+    "echoagent",
+    "hud"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/echo-console/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "echoagent_invoke",
+    "storage"
+  ],
+  "updated_at": "2026-04-30T16:18:00Z",
+  "changelog": "changelog.md"
+}
