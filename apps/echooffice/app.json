@@ -1,0 +1,44 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.echooffice",
+  "name": {
+    "zh-CN": "EchoOffice",
+    "en": "EchoOffice"
+  },
+  "version": "0.1.0",
+  "category": "productivity",
+  "summary": {
+    "zh-CN": "AI 优先的 Office 文档工作台",
+    "en": "AI-first Office document workbench"
+  },
+  "description": {
+    "zh-CN": "EchoOffice 打开本地 DOCX、XLSX、PPTX 和 PDF 文件，把真实 ONLYOFFICE 文档编辑界面与 EchoAgent 文档改写能力连接起来。文档编辑发生在本地 workspace 副本中，便于预览、刷新和后续导出。",
+    "en": "EchoOffice opens local DOCX, XLSX, PPTX, and PDF files, connecting a real ONLYOFFICE editing surface with EchoAgent-powered document edits. Changes are applied to local workspace copies for visible reloads, review, and later export."
+  },
+  "tags": [
+    "office",
+    "document",
+    "docx",
+    "onlyoffice",
+    "echoagent",
+    "productivity"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/echooffice/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "filesystem",
+    "storage",
+    "network",
+    "echoagent_invoke",
+    "app_comm",
+    "mcp"
+  ],
+  "updated_at": "2026-04-30T15:00:00Z",
+  "changelog": "changelog.md"
+}
