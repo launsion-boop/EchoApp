@@ -2,18 +2,18 @@
   "schema": "echoapp-app/v1",
   "id": "app.local.oar",
   "name": {
-    "zh-CN": "OAR",
-    "en": "OAR"
+    "zh-CN": "OAR v4",
+    "en": "OAR v4"
   },
-  "version": "1.1.1",
+  "version": "4.0.6",
   "category": "productivity",
   "summary": {
-    "zh-CN": "团队目标管理与协作工具",
-    "en": "Team OKR management and collaboration"
+    "zh-CN": "Objective / Agent / Result 云团队工作台",
+    "en": "Cloud team workspace for Objective, Agent, and Result"
   },
   "description": {
-    "zh-CN": "用于团队目标拆解、进度跟踪、局域网协作和 AI 辅助分析。",
-    "en": "Manage team goals, track progress, collaborate over LAN, and analyze work with AI assistance."
+    "zh-CN": "OAR v4 用于团队目标拆解、Agent 协作、Result 跟踪和云端同步。",
+    "en": "OAR v4 manages team objectives, Agent collaboration, result tracking, and cloud sync."
   },
   "tags": [
     "okr",
@@ -29,15 +29,20 @@
   },
   "min_echobraid": "2.0.0",
   "capabilities": [
+    "ui",
+    "storage",
     "database",
-    "lan_network",
-    "notification",
-    "background_task",
-    "auth",
     "network",
+    "clipboard",
+    "auth",
+    "mcp",
     "echoagent_invoke",
-    "echoagent_event"
+    "echoagent_event",
+    "agent_push",
+    "lan_listen",
+    "lan_network",
+    "domain_seed"
   ],
-  "updated_at": "2026-04-28T00:00:00Z",
+  "updated_at": "2026-04-30T14:53:46Z",
   "changelog": "changelog.md"
 }
