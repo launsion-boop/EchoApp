@@ -5,7 +5,7 @@
     "zh-CN": "Echo控制台",
     "en": "Echo Console"
   },
-  "version": "1.1.2",
+  "version": "1.2.0",
   "category": "developer-tools",
   "summary": {
     "zh-CN": "暗黑科技风的 EchoBraid 中控大屏",
@@ -35,6 +35,6 @@
     "echoagent_invoke",
     "storage"
   ],
-  "updated_at": "2026-04-30T16:18:00Z",
+  "updated_at": "2026-04-30T17:30:00Z",
   "changelog": "changelog.md"
 }
