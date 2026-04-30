@@ -1,6 +1,6 @@
 {
   "schema": "echoapp-catalog/v1",
-  "updated_at": "2026-04-30T16:18:00Z",
+  "updated_at": "2026-04-30T16:30:00Z",
   "apps": [
     {
       "id": "app.local.earth-garden",
@@ -17,6 +17,10 @@
     {
       "id": "app.local.echorec",
       "path": "apps/echorec/app.json"
+    },
+    {
+      "id": "app.local.echooffice",
+      "path": "apps/echooffice/app.json"
     },
     {
       "id": "app.local.juicy-snake",
