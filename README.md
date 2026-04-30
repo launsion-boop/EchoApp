@@ -79,6 +79,8 @@ Each app lives in one directory under `apps/`. The directory name is a stable sl
 
 For an existing app, do not change `id` or `apps/<app-slug>/app.json` unless you intentionally want EchoBraid to treat it as a different app.
 
+Pull request validation rejects an update when an existing `apps/<app-slug>/app.json` changes its `id`. To publish a different app identity, create a new app directory and catalog entry instead.
+
 ## app.json Template
 
 ```json
@@ -182,6 +184,7 @@ The validator checks:
 - Localized `name`, `summary`, and `description`.
 - Semver-compatible versions.
 - Existing app versions do not go backwards.
+- Existing app IDs do not change for the same `app.json` path.
 - `README.md` and `changelog.md` exist.
 - `app.echo` exists and is not empty.
 - `.echo` manifest `id`, `version`, and `update_source` match `app.json`.

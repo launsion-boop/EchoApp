@@ -196,6 +196,9 @@ function validateApp(appEntry) {
   validateEchoFile(appDir, app, context);
 
   const previous = readGitJson(appEntry.path);
+  if (previous && previous.id && id !== previous.id) {
+    fail(`${context}.id (${id}) must not change from origin/main (${previous.id}); publish a new app path if this is a different app`);
+  }
   if (previous && previous.version && compareSemver(version, previous.version) < 0) {
     fail(`${context}.version (${version}) must not be lower than origin/main (${previous.version})`);
   }
