@@ -2,6 +2,7 @@
 
 ## 0.1.64 - 2026-05-06
 
+- Replace the package with the local preset build that fixes the scrolling issue.
 - Publish the latest preset EchoREC package.
 
 ## 0.1.63 - 2026-04-29
