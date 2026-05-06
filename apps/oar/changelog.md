@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.8 - 2026-05-06
+
+- Publish the latest preset OAR package.
+
 ## 4.0.6 - 2026-04-30
 
 - Replace OAR with the v4 cloud team workspace package.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.64 - 2026-05-06
+
+- Publish the latest preset EchoREC package.
+
 ## 0.1.63 - 2026-04-29
 
 - Publish the latest EchoREC v2 package with EchoREC Agent support.

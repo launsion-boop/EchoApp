@@ -5,7 +5,7 @@
     "zh-CN": "OAR v4",
     "en": "OAR v4"
   },
-  "version": "4.0.6",
+  "version": "4.0.8",
   "category": "productivity",
   "summary": {
     "zh-CN": "Objective / Agent / Result 云团队工作台",
@@ -43,6 +43,6 @@
     "lan_network",
     "domain_seed"
   ],
-  "updated_at": "2026-04-30T14:53:46Z",
+  "updated_at": "2026-05-06T14:21:13Z",
   "changelog": "changelog.md"
 }
