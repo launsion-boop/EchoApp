@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.6 - 2026-05-07
+
+- Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.
+- Add `translate="no"` and runtime SVG replacement for legacy emoji glyphs.
+- Tighten the shared hero-title override so repackaged apps cannot keep oversized source headings after merge/rebase.
+
 ## 2.0.5 - 2026-05-07
 
 - Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.

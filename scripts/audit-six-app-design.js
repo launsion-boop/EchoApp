@@ -141,7 +141,9 @@ function auditSharedCss(scope, file, text) {
   requireText(scope, file, text, 'box-shadow: var(--echo-shadow-sm) !important;', 'cards must use shared shadow');
   requireText(scope, file, text, '.page-hero-mono {\n  display: none !important;', 'xiaozhi home eyebrow must be removed');
   requireText(scope, file, text, '.page-hero {\n  text-align: left !important;', 'xiaozhi home hero must align to the search input left edge');
+  requireText(scope, file, text, '.page-hero-title {\n  margin: 0 0 var(--echo-space-xs) !important;\n  text-align: left !important;\n  font-size: var(--echo-font-title) !important;', 'xiaozhi home hero title must not keep the oversized original clamp font');
   requireText(scope, file, text, '.page-hero-sub {\n  margin: 0 !important;', 'xiaozhi home hero copy must not be centered');
+  requireText(scope, file, text, 'color: var(--echo-text-secondary) !important;', 'xiaozhi home hero copy must use shared readable secondary text color');
   requireText(scope, file, text, '.detail-tabs button.active::after {\n  content: none !important;', 'xiaozhi detail tabs must not draw an underline through the active label');
   requireText(scope, file, text, 'text-decoration: none !important;', 'navigation tabs must not show strike-through or underline decoration');
   requireText(scope, file, text, '#chat-panel .chat-head', 'xiaozhi assistant header must be bound to the shared assistant contract');
