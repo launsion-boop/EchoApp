@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.65 - 2026-05-07
+
+- Bump EchoREC after publishing the latest preset package.
+
 ## 0.1.64 - 2026-05-06
 
 - Replace the package with the latest local preset build while keeping version 0.1.64.
