@@ -10,11 +10,11 @@ const ROOT = path.resolve(__dirname, '..');
 const STAMP = '2026-05-07T03:15:00Z';
 
 const APPS = [
-  { slug: 'xiaozhi', version: '0.9.6', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
-  { slug: 'echorec', version: '0.2.6', zip: true, htmlFiles: ['index.html'] },
-  { slug: 'oar', version: '4.0.14', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
-  { slug: 'echooffice', version: '0.2.6', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
-  { slug: 'echo-console', version: '2.0.6', zip: true, htmlFiles: ['index.html'] }
+  { slug: 'xiaozhi', version: '0.9.7', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
+  { slug: 'echorec', version: '0.2.7', zip: true, htmlFiles: ['index.html'] },
+  { slug: 'oar', version: '4.0.15', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
+  { slug: 'echooffice', version: '0.2.7', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
+  { slug: 'echo-console', version: '2.0.7', zip: true, htmlFiles: ['index.html'] }
 ];
 
 const APP_META = {
@@ -166,40 +166,21 @@ const STYLE = `
   --err: var(--echo-danger);
 }
 
-/* Echo UI I18N Contract v0.1.0 */
-.echo-i18n-toggle {
-  position: fixed !important;
-  right: 12px !important;
-  bottom: 12px !important;
-  z-index: 10000 !important;
-  height: 28px !important;
-  min-width: 52px !important;
-  padding: 0 10px !important;
-  border: 1px solid var(--echo-border) !important;
-  border-radius: var(--echo-radius-pill) !important;
-  background: color-mix(in srgb, var(--echo-bg-raised) 94%, transparent) !important;
-  color: var(--echo-text-secondary) !important;
-  box-shadow: var(--echo-shadow-sm) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  font-family: var(--echo-font-sans) !important;
-  font-size: var(--echo-font-caption) !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  letter-spacing: 0 !important;
-  cursor: pointer !important;
-}
-.echo-i18n-toggle:hover {
-  border-color: var(--echo-border-strong) !important;
-  color: var(--echo-text) !important;
-  background: var(--echo-bg-raised) !important;
-}
-.echo-i18n-toggle:focus,
-.echo-i18n-toggle:focus-visible {
-  outline: none !important;
-  border-color: var(--echo-accent) !important;
-  box-shadow: 0 0 0 3px var(--echo-accent-ring) !important;
+/* Echo UI Platform Mode Contract v0.1.0 */
+.theme-toggle,
+.mode-toggle,
+[data-theme-toggle],
+[aria-label="切换主题"],
+[aria-label="切换明暗主题"],
+[aria-label="切换亮色/暗色模式"],
+[aria-label="Toggle theme"],
+[aria-label="Toggle light/dark theme"],
+[title="切换主题"],
+[title="切换明暗主题"],
+[title="切换亮色/暗色模式"],
+[title="Toggle theme"],
+[title="Toggle light/dark theme"] {
+  display: none !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -655,9 +636,28 @@ header nav button {
 }
 
 .toolbar {
-  padding-top: 0 !important;
-  padding-bottom: var(--echo-space-lg) !important;
-  margin-bottom: var(--echo-space-lg) !important;
+  max-width: none !important;
+  margin: 0 0 var(--echo-space-xl) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: var(--echo-space-sm) !important;
+}
+
+.agent-grid,
+.pagination {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.agent-grid {
+  justify-content: flex-start !important;
+  grid-template-columns: repeat(auto-fill, minmax(304px, 360px)) !important;
 }
 
 .detail-tabs button,
@@ -2332,6 +2332,14 @@ const CHAT_RUNTIME = `
     '.oar-sdk-agent-message',
     '.oar-agent-message'
   ].join(',');
+  const outgoingSelector = [
+    '.echobraid-bubble-row--out',
+    '.chat-msg.user',
+    '.chat-message.user',
+    '.agent-rail-message--out',
+    '.oar-sdk-agent-message--out',
+    '.oar-agent-message--out'
+  ].join(',');
   const emptySelector = [
     '.echobraid-empty-state',
     '.chat-empty',
@@ -2394,6 +2402,119 @@ const CHAT_RUNTIME = `
       : root.querySelector('.echobraid-chat-thread,.chat-messages,.sidebar-body,.agent-rail-messages,.oar-sdk-agent-messages');
   }
 
+  function rootFor(source) {
+    return source && source.closest ? source.closest(rootSelectors.join(',')) : null;
+  }
+
+  function normalizeText(value) {
+    return String(value || '').replace(/\\s+/g, ' ').trim();
+  }
+
+  function readInput(input) {
+    return input && input.isContentEditable ? input.textContent : input && input.value;
+  }
+
+  function usableInput(input) {
+    if (!input || input.disabled || input.readOnly) return false;
+    const type = (input.getAttribute('type') || '').toLowerCase();
+    return !['button', 'submit', 'checkbox', 'radio', 'hidden', 'range'].includes(type);
+  }
+
+  function inputsFor(source) {
+    const scope = source && source.closest ? (source.closest(composerSelector) || source.closest(rootSelectors.join(',')) || document) : document;
+    return Array.from(scope.querySelectorAll(inputSelector)).filter(usableInput);
+  }
+
+  function draftFor(source) {
+    const direct = source && source.matches && source.matches(inputSelector) && usableInput(source) ? source : null;
+    const inputs = direct ? [direct] : inputsFor(source);
+    for (const input of inputs) {
+      const text = normalizeText(readInput(input));
+      if (text) return text;
+    }
+    return '';
+  }
+
+  function messageText(node) {
+    const clone = node.cloneNode(true);
+    clone.querySelectorAll('[data-echo-ui-typing="1"], [data-typing], .echo-ui-typing-dot, time').forEach((child) => child.remove());
+    return normalizeText(clone.textContent);
+  }
+
+  function hasOutgoingMessage(root, text) {
+    const needle = normalizeText(text);
+    if (!needle) return true;
+    return Array.from(root.querySelectorAll(outgoingSelector)).some((node) => messageText(node) === needle);
+  }
+
+  function generatedUsers(root) {
+    return Array.from(root.querySelectorAll('[data-echo-ui-user="1"]'));
+  }
+
+  function removeDuplicateGeneratedUsers(root) {
+    generatedUsers(root).forEach((generated) => {
+      const text = generated.getAttribute('data-echo-ui-user-text') || messageText(generated);
+      const duplicate = Array.from(root.querySelectorAll(outgoingSelector)).some((node) => node !== generated && !node.hasAttribute('data-echo-ui-user') && messageText(node) === text);
+      if (duplicate) generated.remove();
+    });
+  }
+
+  function makeUserBubble(thread, text) {
+    let node;
+    let bubble;
+    if (thread.matches('.chat-messages')) {
+      node = document.createElement('div');
+      node.className = 'chat-msg user echo-ui-generated-user';
+      bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+      bubble.textContent = text;
+      node.appendChild(bubble);
+    } else if (thread.matches('.sidebar-body')) {
+      node = document.createElement('div');
+      node.className = 'chat-message user echo-ui-generated-user';
+      node.textContent = text;
+    } else if (thread.matches('.agent-rail-messages')) {
+      node = document.createElement('div');
+      node.className = 'agent-rail-message agent-rail-message--out echo-ui-generated-user';
+      bubble = document.createElement('div');
+      bubble.className = 'agent-rail-bubble';
+      bubble.textContent = text;
+      node.appendChild(bubble);
+    } else if (thread.matches('.oar-sdk-agent-messages')) {
+      node = document.createElement('div');
+      node.className = 'oar-sdk-agent-message oar-sdk-agent-message--out echo-ui-generated-user';
+      bubble = document.createElement('div');
+      bubble.className = 'oar-sdk-agent-bubble';
+      bubble.textContent = text;
+      node.appendChild(bubble);
+    } else {
+      node = document.createElement('div');
+      node.className = 'echobraid-bubble-row echobraid-bubble-row--out echo-ui-generated-user';
+      bubble = document.createElement('div');
+      bubble.className = 'echobraid-bubble echobraid-bubble--out';
+      bubble.textContent = text;
+      node.appendChild(bubble);
+    }
+    node.setAttribute('data-echo-ui-user', '1');
+    node.setAttribute('data-echo-ui-user-text', text);
+    node.setAttribute('data-echo-i18n-ignore', '1');
+    return node;
+  }
+
+  function insertUserMessage(source, text) {
+    const root = rootFor(source);
+    if (!root || !text || hasOutgoingMessage(root, text)) return;
+    const thread = threadFor(root);
+    if (!thread) return;
+    const node = makeUserBubble(thread, text);
+    const typing = thread.querySelector('[data-echo-ui-typing="1"]');
+    if (typing && typing.parentElement === thread) thread.insertBefore(node, typing);
+    else thread.appendChild(node);
+    thread.classList.add('echo-ui-chat-has-messages');
+    root.classList.add('echo-ui-chat-has-messages');
+    thread.scrollTop = thread.scrollHeight;
+  }
+
   function appendDots(node) {
     for (let i = 0; i < 3; i += 1) {
       const dot = document.createElement('span');
@@ -2422,7 +2543,7 @@ const CHAT_RUNTIME = `
   }
 
   function showTyping(source) {
-    const root = source && source.closest ? source.closest(rootSelectors.join(',')) : null;
+    const root = rootFor(source);
     if (!root || hasNativeTyping(root) || root.querySelector('[data-echo-ui-typing="1"]')) return;
     const thread = threadFor(root);
     if (!thread) return;
@@ -2456,6 +2577,7 @@ const CHAT_RUNTIME = `
   }
 
   function updateRoot(root) {
+    removeDuplicateGeneratedUsers(root);
     const has = hasRealMessage(root);
     root.classList.toggle('echo-ui-chat-has-messages', has);
     removeResolvedTyping(root);
@@ -2497,13 +2619,7 @@ const CHAT_RUNTIME = `
   }
 
   function clearComposer(source) {
-    const scope = source && source.closest ? (source.closest(composerSelector) || source.closest(rootSelectors.join(',')) || document) : document;
-    const inputs = Array.from(scope.querySelectorAll(inputSelector)).filter((input) => {
-      if (input.disabled || input.readOnly) return false;
-      const type = (input.getAttribute('type') || '').toLowerCase();
-      if (['button', 'submit', 'checkbox', 'radio', 'hidden', 'range'].includes(type)) return false;
-      return true;
-    });
+    const inputs = inputsFor(source);
     inputs.forEach((input) => {
       const current = input.isContentEditable ? input.textContent : input.value;
       if (!String(current || '').trim()) return;
@@ -2513,12 +2629,15 @@ const CHAT_RUNTIME = `
   }
 
   function afterSend(source) {
+    const text = draftFor(source);
     window.setTimeout(() => {
+      insertUserMessage(source, text);
       clearComposer(source);
       showTyping(source);
       updateAll();
     }, 0);
     window.setTimeout(() => {
+      insertUserMessage(source, text);
       clearComposer(source);
       showTyping(source);
       updateAll();
@@ -2553,7 +2672,7 @@ const CHAT_RUNTIME = `
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateAll, { once: true });
   else updateAll();
-  window.EchoUIChat = Object.assign(window.EchoUIChat || {}, { refresh: updateAll, clearComposer, showTyping });
+  window.EchoUIChat = Object.assign(window.EchoUIChat || {}, { refresh: updateAll, clearComposer, showTyping, insertUserMessage });
 })();
 </script>
 `;
@@ -3124,38 +3243,10 @@ const I18N_RUNTIME = `
   function setLocale(locale) {
     const next = modes.includes(locale) ? locale : 'zh';
     localStorage.setItem(STORE_KEY, next);
-    updateToggle(next);
     apply(document.body || document.documentElement);
   }
 
-  function updateToggle(locale) {
-    const btn = document.querySelector('.echo-i18n-toggle');
-    if (!btn) return;
-    btn.textContent = locale === 'en' ? 'EN' : (locale === 'both' ? '中/EN' : '中');
-    btn.setAttribute('aria-label', locale === 'en' ? 'Language: English' : (locale === 'both' ? 'Language: Chinese and English' : '语言：中文'));
-    btn.title = locale === 'en' ? 'Switch language' : '切换语言';
-  }
-
-  function installToggle() {
-    if (document.querySelector('.echo-i18n-toggle')) {
-      updateToggle(getLocale());
-      return;
-    }
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'echo-i18n-toggle';
-    btn.setAttribute('data-echo-i18n-ignore', '1');
-    btn.addEventListener('click', () => {
-      const current = getLocale();
-      const next = modes[(modes.indexOf(current) + 1) % modes.length];
-      setLocale(next);
-    });
-    document.body.appendChild(btn);
-    updateToggle(getLocale());
-  }
-
   function boot() {
-    installToggle();
     apply(document.body || document.documentElement);
   }
 
@@ -3311,6 +3402,9 @@ function updateChangelog(app) {
     '- Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.',
     '- Add `translate="no"` and runtime SVG replacement for legacy emoji glyphs.',
     '- Tighten the shared hero-title override so repackaged apps cannot keep oversized source headings after merge/rebase.',
+    '- Hide app-local language and theme toggle buttons; locale and color mode are controlled by the platform while both modes remain supported.',
+    '- Preserve sent user chat bubbles before showing the waiting indicator, with duplicate cleanup when native rendering catches up.',
+    '- Flatten home toolbar/list alignment so search rows and cards align with page titles without an extra surface.',
     '',
     ''
   ].join('\n');
