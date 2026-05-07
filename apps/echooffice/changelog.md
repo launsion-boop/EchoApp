@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4 - 2026-05-07
+
+- Publish the latest preset EchoOffice package with OTA update metadata.
+
 ## 0.1.0 - 2026-04-30
 
 - Publish EchoOffice to the EchoApp catalog.
