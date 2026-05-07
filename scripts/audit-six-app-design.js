@@ -22,7 +22,7 @@ const REQUIRED_INPUT_FOCUS_MARKER = 'Echo UI Input Focus Contract v0.1.0';
 const REQUIRED_ASSISTANT_MESSAGE_MARKER = 'Echo UI Assistant Message Contract v0.1.0';
 const REQUIRED_ASSISTANT_MESSAGE_SPACING_MARKER = 'Echo UI Assistant Message Spacing Guard v0.1.0';
 const REQUIRED_CHAT_RUNTIME_MARKER = 'Echo UI Chat Behavior Runtime v0.1.0';
-const REQUIRED_I18N_STYLE_MARKER = 'Echo UI I18N Contract v0.1.0';
+const REQUIRED_PLATFORM_MODE_MARKER = 'Echo UI Platform Mode Contract v0.1.0';
 const REQUIRED_I18N_RUNTIME_MARKER = 'Echo UI I18N Runtime v0.1.0';
 const REQUIRED_OAR_COMPOSER_MARKER = 'Echo UI OAR Agent Composer Contract v0.1.0';
 const REQUIRED_OAR_THEME_MARKER = 'Echo UI OAR Blue Theme Contract v0.1.0';
@@ -129,8 +129,9 @@ function auditSharedCss(scope, file, text) {
   requireText(scope, file, text, REQUIRED_INPUT_FOCUS_MARKER, 'missing rounded input focus contract');
   requireText(scope, file, text, REQUIRED_ASSISTANT_MESSAGE_MARKER, 'missing shared assistant message/bubble contract');
   requireText(scope, file, text, REQUIRED_ASSISTANT_MESSAGE_SPACING_MARKER, 'missing final assistant message spacing guard');
-  requireText(scope, file, text, REQUIRED_I18N_STYLE_MARKER, 'missing shared bilingual UI style contract');
-  requireText(scope, file, text, '.echo-i18n-toggle', 'missing shared bilingual language toggle style');
+  requireText(scope, file, text, REQUIRED_PLATFORM_MODE_MARKER, 'missing platform-owned language/theme mode contract');
+  requireText(scope, file, text, '.theme-toggle,', 'missing app-local theme toggle hide rule');
+  rejectPattern(scope, file, text, /\.echo-i18n-toggle/, 'apps must not render a visible language toggle; platform owns locale switching');
   requireText(scope, file, text, '"PingFang SC"', 'missing macOS Chinese font');
   requireText(scope, file, text, '"Microsoft YaHei"', 'missing Windows Chinese font');
   requireText(scope, file, text, '.brand,', 'EchoREC/sidebar brand header is not bound to shared topbar contract');
@@ -261,6 +262,9 @@ for (const target of TARGETS) {
       requireText(target.slug, file, text, 'function showTyping(source)', 'chat runtime must insert a visible typing bubble after send when the app has no native waiting state');
       requireText(target.slug, file, text, 'data-echo-ui-typing', 'chat runtime must mark generated typing bubbles so they can be removed after replies');
       requireText(target.slug, file, text, 'removeResolvedTyping(root)', 'chat runtime must remove generated typing bubbles after assistant replies arrive');
+      requireText(target.slug, file, text, 'function insertUserMessage(source, text)', 'chat runtime must preserve the visible user message before showing the waiting state');
+      requireText(target.slug, file, text, 'data-echo-ui-user', 'chat runtime must mark generated user bubbles so native duplicates can be removed');
+      requireText(target.slug, file, text, 'removeDuplicateGeneratedUsers(root)', 'chat runtime must remove generated user bubbles when native rendering catches up');
     }
   }
 }
@@ -272,10 +276,13 @@ const browserHtml = read(path.join(BROWSER_ROOT, 'index.html'));
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_ASSISTANT_MARKER, 'browser missing shared assistant rail contract');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_ASSISTANT_MESSAGE_MARKER, 'browser missing shared assistant message/bubble contract');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_CHAT_RUNTIME_MARKER, 'browser missing shared chat behavior runtime');
-requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_I18N_STYLE_MARKER, 'browser missing shared bilingual UI style contract');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'function insertUserMessage(source, text)', 'browser shared chat runtime must preserve visible user messages');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'data-echo-ui-user', 'browser shared chat runtime must mark generated user bubbles');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_PLATFORM_MODE_MARKER, 'browser missing platform-owned language/theme mode contract');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_I18N_RUNTIME_MARKER, 'browser missing shared bilingual UI runtime');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'window.EchoI18n', 'browser must expose EchoI18n for runtime locale switching');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, "localStorage.getItem(STORE_KEY)", 'browser i18n runtime must persist the selected locale');
+rejectPattern('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, /\.echo-i18n-toggle/, 'browser must not render a visible language toggle; platform owns locale switching');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, '"PingFang SC"', 'missing macOS Chinese font');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, '"Microsoft YaHei"', 'missing Windows Chinese font');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'height: 24px;', 'browser tab strip must be 24px');
