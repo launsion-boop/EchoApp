@@ -259,6 +259,8 @@ for (const target of TARGETS) {
     const text = read(file);
     auditSharedCss(target.slug, file, text);
     if (rel.endsWith('.html')) {
+      rejectPattern(target.slug, file, text, /<button[^>]*(?:class=["'][^"']*\btheme-toggle\b|id=["']theme-toggle["']|data-theme-toggle)/, 'HTML shell must not render an app-local theme toggle button');
+      rejectPattern(target.slug, file, text, /getElementById\(['"]theme-toggle['"]\)\.addEventListener/, 'HTML shell must not bind an app-local theme toggle button');
       requireText(target.slug, file, text, REQUIRED_CHAT_RUNTIME_MARKER, 'HTML shell must install the shared chat behavior runtime');
       requireText(target.slug, file, text, REQUIRED_THEME_RUNTIME_MARKER, 'HTML shell must install the platform theme runtime');
       requireText(target.slug, file, text, 'window.EchoTheme', 'HTML shell must expose EchoTheme for platform theme switching');

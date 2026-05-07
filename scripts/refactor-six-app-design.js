@@ -3648,8 +3648,14 @@ function patchEchoConsole(file) {
   if (!fs.existsSync(file)) return;
   let text = read(file);
   text = text
+    .replace(/\n\s*<button class="theme-toggle" id="theme-toggle"[\s\S]*?<\/button>\n(?=\s*<\/div>\n\s*<\/header>)/, '\n')
     .replace(/\? \['#007AFF','#5856D6','#34C759','#FF9500','#FF2D55','#FFCC00','#5AC8FA','#AF52DE'\]\s*: \['#22D3EE','#A78BFA','#34C759','#F97316','#EC4899','#FFD60A','#06B6D4','#8B5CF6'\]/,
       "? ['#dbeafe','#e0e7ff','#dcfce7','#fef3c7','#ffe4e6','#fef9c3','#e0f2fe','#f3e8ff']\n        : ['#1d4ed8','#4338ca','#047857','#b45309','#be123c','#a16207','#0e7490','#7e22ce']")
+    .replace("const saved = localStorage.getItem('echo-console-theme');", "const saved = localStorage.getItem('echo.ui.theme');")
+    .replace("localStorage.setItem('echo-console-theme', theme);", "localStorage.setItem('echo.ui.theme', theme);")
+    .replace("      document.getElementById('theme-icon-dark').style.display = theme === 'dark' ? 'block' : 'none';\n      document.getElementById('theme-icon-light').style.display = theme === 'light' ? 'block' : 'none';\n", '')
+    .replace("    function toggleTheme() {\n      applyTheme(themeState.current === 'dark' ? 'light' : 'dark');\n    }\n", "    function toggleTheme() {\n      applyTheme(themeState.current === 'dark' ? 'light' : 'dark');\n    }\n\n    window.addEventListener('echo-ui-theme-applied', (event) => {\n      const mode = event && event.detail && event.detail.mode;\n      if ((mode === 'light' || mode === 'dark') && mode !== themeState.current) {\n        applyTheme(mode);\n      }\n    });\n")
+    .replace("      document.getElementById('theme-toggle').addEventListener('click', toggleTheme);\n", '')
     .replace("treemapLabel: isLight ? '#1a1a2e' : '#0d0d18'", "treemapLabel: isLight ? '#111827' : '#f8fafc'")
     .replace("color: themeState.current === 'light' ? '#1a1a2e' : 'rgba(255,255,255,0.92)'", "color: themeState.current === 'light' ? '#111827' : '#f8fafc'")
     .replace(/fontFamily:'-apple-system, sans-serif'/g, "fontFamily:'-apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"SF Pro Text\", \"PingFang SC\", \"Microsoft YaHei\", \"Segoe UI\", system-ui, sans-serif'")
