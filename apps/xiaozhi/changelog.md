@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.7 - 2026-05-07
+
+- Repackage xiaozhi app from latest source.
+
 ## 0.8.6 - 2026-04-30
 
 - Initial EchoApp catalog publish for the xiaozhi app.

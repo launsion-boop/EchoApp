@@ -5,7 +5,7 @@
     "zh-CN": "小智",
     "en": "Xiaozhi"
   },
-  "version": "0.8.6",
+  "version": "0.8.7",
   "category": "productivity",
   "summary": {
     "zh-CN": "管理 xiaozhi.me 智能体、设备、音色与对话历史",
@@ -34,6 +34,6 @@
     "storage",
     "echoagent_invoke"
   ],
-  "updated_at": "2026-04-30T16:30:00Z",
+  "updated_at": "2026-05-07T03:10:23Z",
   "changelog": "changelog.md"
 }
