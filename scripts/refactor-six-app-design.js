@@ -10,11 +10,11 @@ const ROOT = path.resolve(__dirname, '..');
 const STAMP = '2026-05-07T03:15:00Z';
 
 const APPS = [
-  { slug: 'xiaozhi', version: '0.9.5', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
-  { slug: 'echorec', version: '0.2.5', zip: true, htmlFiles: ['index.html'] },
-  { slug: 'oar', version: '4.0.13', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
-  { slug: 'echooffice', version: '0.2.5', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
-  { slug: 'echo-console', version: '2.0.5', zip: true, htmlFiles: ['index.html'] }
+  { slug: 'xiaozhi', version: '0.9.6', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
+  { slug: 'echorec', version: '0.2.6', zip: true, htmlFiles: ['index.html'] },
+  { slug: 'oar', version: '4.0.14', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
+  { slug: 'echooffice', version: '0.2.6', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
+  { slug: 'echo-console', version: '2.0.6', zip: true, htmlFiles: ['index.html'] }
 ];
 
 const APP_META = {
@@ -625,7 +625,7 @@ header nav button {
 
 .page-hero {
   text-align: left !important;
-  padding: var(--echo-space-xl) 0 var(--echo-space-lg) !important;
+  padding: 0 0 var(--echo-space-lg) !important;
   margin: 0 !important;
   max-width: none !important;
 }
@@ -637,12 +637,21 @@ header nav button {
 .page-hero-title {
   margin: 0 0 var(--echo-space-xs) !important;
   text-align: left !important;
+  font-size: var(--echo-font-title) !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
 }
 
 .page-hero-sub {
   margin: 0 !important;
   max-width: 680px !important;
   text-align: left !important;
+  font-size: var(--echo-font-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+  color: var(--echo-text-secondary) !important;
 }
 
 .toolbar {
@@ -3301,6 +3310,7 @@ function updateChangelog(app) {
     '',
     '- Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.',
     '- Add `translate="no"` and runtime SVG replacement for legacy emoji glyphs.',
+    '- Tighten the shared hero-title override so repackaged apps cannot keep oversized source headings after merge/rebase.',
     '',
     ''
   ].join('\n');
