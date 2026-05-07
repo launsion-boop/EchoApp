@@ -5,7 +5,7 @@
     "zh-CN": "OAR v4",
     "en": "OAR v4"
   },
-  "version": "4.0.8",
+  "version": "4.0.13",
   "category": "productivity",
   "summary": {
     "zh-CN": "Objective / Agent / Result 云团队工作台",
@@ -43,6 +43,8 @@
     "lan_network",
     "domain_seed"
   ],
-  "updated_at": "2026-05-06T14:21:13Z",
-  "changelog": "changelog.md"
+  "updated_at": "2026-05-07T03:15:00Z",
+  "changelog": "changelog.md",
+  "color": "#2563eb",
+  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><circle cx='12' cy='12' r='4.6'/><circle cx='12' cy='12' r='1.5' fill='currentColor' stroke='none'/><path d='M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3'/></g>"
 }

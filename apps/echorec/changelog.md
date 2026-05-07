@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.5 - 2026-05-07
+
+- Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.
+- Add `translate="no"` and runtime SVG replacement for legacy emoji glyphs.
+
 ## 0.1.65 - 2026-05-07
 
 - Bump EchoREC after publishing the latest preset package.
