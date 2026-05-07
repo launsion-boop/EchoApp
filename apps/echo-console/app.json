@@ -5,7 +5,7 @@
     "zh-CN": "Echo控制台",
     "en": "Echo Console"
   },
-  "version": "2.0.7",
+  "version": "2.0.8",
   "category": "developer-tools",
   "summary": {
     "zh-CN": "macOS 风格 EchoBraid 中控大屏，支持暗色/亮色主题与响应式布局",
