@@ -5,7 +5,7 @@
     "zh-CN": "EchoREC",
     "en": "EchoREC"
   },
-  "version": "0.1.65",
+  "version": "0.2.5",
   "category": "productivity",
   "summary": {
     "zh-CN": "AI 会议转写与 EchoREC Agent",
@@ -39,6 +39,8 @@
     "filesystem",
     "mcp"
   ],
-  "updated_at": "2026-05-07T02:26:16Z",
-  "changelog": "changelog.md"
+  "updated_at": "2026-05-07T03:15:00Z",
+  "changelog": "changelog.md",
+  "color": "#ef4444",
+  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='3' width='6' height='12' rx='3' fill='currentColor' stroke='none'/><path d='M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8'/></g>"
 }

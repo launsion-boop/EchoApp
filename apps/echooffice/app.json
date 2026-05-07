@@ -5,7 +5,7 @@
     "zh-CN": "EchoOffice",
     "en": "EchoOffice"
   },
-  "version": "0.1.4",
+  "version": "0.2.5",
   "category": "productivity",
   "summary": {
     "zh-CN": "AI 优先的 Office 文档工作台",
@@ -39,6 +39,8 @@
     "app_comm",
     "mcp"
   ],
-  "updated_at": "2026-05-07T02:22:08Z",
-  "changelog": "changelog.md"
+  "updated_at": "2026-05-07T03:15:00Z",
+  "changelog": "changelog.md",
+  "color": "#d45b35",
+  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 3.8h8.2l3.8 3.8v12.6h-12a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z'/><path d='M14.5 4v4h4M8 11h7M8 14h7M8 17h3.5M13.5 16h3.2M13.5 18.5h3.2'/></g>"
 }
