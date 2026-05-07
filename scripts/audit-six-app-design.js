@@ -22,7 +22,9 @@ const REQUIRED_INPUT_FOCUS_MARKER = 'Echo UI Input Focus Contract v0.1.0';
 const REQUIRED_ASSISTANT_MESSAGE_MARKER = 'Echo UI Assistant Message Contract v0.1.0';
 const REQUIRED_ASSISTANT_MESSAGE_SPACING_MARKER = 'Echo UI Assistant Message Spacing Guard v0.1.0';
 const REQUIRED_CHAT_RUNTIME_MARKER = 'Echo UI Chat Behavior Runtime v0.1.0';
+const REQUIRED_THEME_RUNTIME_MARKER = 'Echo UI Theme Runtime v0.1.0';
 const REQUIRED_PLATFORM_MODE_MARKER = 'Echo UI Platform Mode Contract v0.1.0';
+const REQUIRED_DARK_READABILITY_MARKER = 'Echo UI Dark Readability Contract v0.1.0';
 const REQUIRED_I18N_RUNTIME_MARKER = 'Echo UI I18N Runtime v0.1.0';
 const REQUIRED_OAR_COMPOSER_MARKER = 'Echo UI OAR Agent Composer Contract v0.1.0';
 const REQUIRED_OAR_THEME_MARKER = 'Echo UI OAR Blue Theme Contract v0.1.0';
@@ -130,6 +132,9 @@ function auditSharedCss(scope, file, text) {
   requireText(scope, file, text, REQUIRED_ASSISTANT_MESSAGE_MARKER, 'missing shared assistant message/bubble contract');
   requireText(scope, file, text, REQUIRED_ASSISTANT_MESSAGE_SPACING_MARKER, 'missing final assistant message spacing guard');
   requireText(scope, file, text, REQUIRED_PLATFORM_MODE_MARKER, 'missing platform-owned language/theme mode contract');
+  requireText(scope, file, text, REQUIRED_DARK_READABILITY_MARKER, 'missing dark readability override contract');
+  requireText(scope, file, text, 'input[type="file"]::file-selector-button', 'dark mode must explicitly style native file chooser buttons');
+  requireText(scope, file, text, '.dropzone .primary', 'EchoOffice dropzone primary action must keep readable dark-mode contrast');
   requireText(scope, file, text, '.theme-toggle,', 'missing app-local theme toggle hide rule');
   rejectPattern(scope, file, text, /\.echo-i18n-toggle/, 'apps must not render a visible language toggle; platform owns locale switching');
   requireText(scope, file, text, '"PingFang SC"', 'missing macOS Chinese font');
@@ -255,8 +260,15 @@ for (const target of TARGETS) {
     auditSharedCss(target.slug, file, text);
     if (rel.endsWith('.html')) {
       requireText(target.slug, file, text, REQUIRED_CHAT_RUNTIME_MARKER, 'HTML shell must install the shared chat behavior runtime');
+      requireText(target.slug, file, text, REQUIRED_THEME_RUNTIME_MARKER, 'HTML shell must install the platform theme runtime');
+      requireText(target.slug, file, text, 'window.EchoTheme', 'HTML shell must expose EchoTheme for platform theme switching');
+      requireText(target.slug, file, text, 'window.__echobraidSetTheme', 'HTML shell must expose the legacy EchoBraid theme setter');
+      requireText(target.slug, file, text, 'echobraid:theme-request', 'HTML shell must listen for EchoBraid theme requests');
+      requireText(target.slug, file, text, "'echo.ui.theme'", 'theme runtime must persist the selected theme');
       requireText(target.slug, file, text, REQUIRED_I18N_RUNTIME_MARKER, 'HTML shell must install the shared bilingual UI runtime');
       requireText(target.slug, file, text, 'window.EchoI18n', 'HTML shell must expose EchoI18n for runtime locale switching');
+      requireText(target.slug, file, text, 'echobraid:locale-request', 'HTML shell must listen for EchoBraid locale requests');
+      requireText(target.slug, file, text, 'userContentSelector', 'i18n runtime must protect user-authored messages without skipping UI labels');
       requireText(target.slug, file, text, "localStorage.getItem(STORE_KEY)", 'i18n runtime must persist the selected locale');
       requireText(target.slug, file, text, 'MutationObserver', 'i18n runtime must translate later dynamic DOM text');
       requireText(target.slug, file, text, 'function showTyping(source)', 'chat runtime must insert a visible typing bubble after send when the app has no native waiting state');
@@ -265,6 +277,10 @@ for (const target of TARGETS) {
       requireText(target.slug, file, text, 'function insertUserMessage(source, text)', 'chat runtime must preserve the visible user message before showing the waiting state');
       requireText(target.slug, file, text, 'data-echo-ui-user', 'chat runtime must mark generated user bubbles so native duplicates can be removed');
       requireText(target.slug, file, text, 'removeDuplicateGeneratedUsers(root)', 'chat runtime must remove generated user bubbles when native rendering catches up');
+      requireText(target.slug, file, text, 'function scheduleUserFallback(source, text)', 'chat runtime must delay fallback user bubbles until native rendering has a chance to appear');
+      requireText(target.slug, file, text, 'function shouldHandleSend(source, text)', 'chat runtime must dedupe click/submit/enter send events');
+      requireText(target.slug, file, text, 'removeEmptyWaitingPlaceholders(root)', 'chat runtime must remove empty assistant placeholders above the typing state');
+      requireText(target.slug, file, text, '[data-role="user"]', 'chat runtime must recognize native SDK user messages for duplicate cleanup');
     }
   }
 }
@@ -278,9 +294,18 @@ requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUI
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_CHAT_RUNTIME_MARKER, 'browser missing shared chat behavior runtime');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'function insertUserMessage(source, text)', 'browser shared chat runtime must preserve visible user messages');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'data-echo-ui-user', 'browser shared chat runtime must mark generated user bubbles');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'function scheduleUserFallback(source, text)', 'browser shared chat runtime must delay fallback user bubbles');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'function shouldHandleSend(source, text)', 'browser shared chat runtime must dedupe send events');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'removeEmptyWaitingPlaceholders(root)', 'browser shared chat runtime must remove empty assistant placeholders');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_PLATFORM_MODE_MARKER, 'browser missing platform-owned language/theme mode contract');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_THEME_RUNTIME_MARKER, 'browser missing platform theme runtime');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'window.EchoTheme', 'browser must expose EchoTheme for platform theme switching');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'window.__echobraidSetTheme', 'browser must expose the legacy EchoBraid theme setter');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'echobraid:theme-request', 'browser must listen for EchoBraid theme requests');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, "'echo.ui.theme'", 'browser theme runtime must persist the selected theme');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, REQUIRED_I18N_RUNTIME_MARKER, 'browser missing shared bilingual UI runtime');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'window.EchoI18n', 'browser must expose EchoI18n for runtime locale switching');
+requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, 'echobraid:locale-request', 'browser must listen for EchoBraid locale requests');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, "localStorage.getItem(STORE_KEY)", 'browser i18n runtime must persist the selected locale');
 rejectPattern('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, /\.echo-i18n-toggle/, 'browser must not render a visible language toggle; platform owns locale switching');
 requireText('browser', path.join(BROWSER_ROOT, 'index.html'), browserHtml, '"PingFang SC"', 'missing macOS Chinese font');

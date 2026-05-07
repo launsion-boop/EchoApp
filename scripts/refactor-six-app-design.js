@@ -10,11 +10,11 @@ const ROOT = path.resolve(__dirname, '..');
 const STAMP = '2026-05-07T03:15:00Z';
 
 const APPS = [
-  { slug: 'xiaozhi', version: '0.9.7', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
-  { slug: 'echorec', version: '0.2.7', zip: true, htmlFiles: ['index.html'] },
-  { slug: 'oar', version: '4.0.15', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
-  { slug: 'echooffice', version: '0.2.7', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
-  { slug: 'echo-console', version: '2.0.7', zip: true, htmlFiles: ['index.html'] }
+  { slug: 'xiaozhi', version: '0.9.8', zip: true, cssFiles: ['app.css'], htmlFiles: ['index.html', 'login.html', 'assistant.html'] },
+  { slug: 'echorec', version: '0.2.8', zip: true, htmlFiles: ['index.html'] },
+  { slug: 'oar', version: '4.0.16', zip: true, cssFiles: ['code/app.css', 'code/agent-client-panel.css', 'code/agent-client-panel-custom.css'], htmlFiles: ['index.html'] },
+  { slug: 'echooffice', version: '0.2.8', zip: true, cssFiles: ['code/app.css'], htmlFiles: ['index.html'] },
+  { slug: 'echo-console', version: '2.0.8', zip: true, htmlFiles: ['index.html'] }
 ];
 
 const APP_META = {
@@ -82,6 +82,7 @@ const STYLE = `
   --echo-bg: #f7f8fb;
   --echo-bg-raised: #ffffff;
   --echo-bg-panel: #f1f3f7;
+  --echo-bg-subtle: #fbfcfd;
   --echo-text: #171a21;
   --echo-text-secondary: #5f6673;
   --echo-text-muted: #8a919f;
@@ -166,6 +167,10 @@ const STYLE = `
   --err: var(--echo-danger);
 }
 
+:root[data-theme="light"], body[data-theme="light"] {
+  color-scheme: light;
+}
+
 /* Echo UI Platform Mode Contract v0.1.0 */
 .theme-toggle,
 .mode-toggle,
@@ -210,15 +215,38 @@ const STYLE = `
 }
 
 :root[data-theme="dark"], body[data-theme="dark"], .dark {
+  color-scheme: dark;
   --echo-bg: #0c0c0e;
   --echo-bg-raised: #141416;
   --echo-bg-panel: #1a1a1f;
+  --echo-bg-subtle: #101318;
   --echo-text: #f2f4f8;
   --echo-text-secondary: #a8aeb8;
   --echo-text-muted: #6e747e;
   --echo-border: #2a2d34;
   --echo-border-strong: #3a3f49;
   --echo-accent-soft: #26275f;
+  --background: 240 8% 5%;
+  --foreground: 220 30% 96%;
+  --card: 240 7% 8%;
+  --card-foreground: 220 30% 96%;
+  --popover: 240 7% 8%;
+  --popover-foreground: 220 30% 96%;
+  --secondary: 228 8% 12%;
+  --secondary-foreground: 220 30% 96%;
+  --muted: 228 8% 12%;
+  --muted-foreground: 220 8% 68%;
+  --accent: 238 43% 26%;
+  --accent-foreground: 236 91% 92%;
+  --border: 225 11% 18%;
+  --input: 225 11% 18%;
+  --bg-canvas: #0c0c0e;
+  --bg-panel: #141416;
+  --bg-elevated: #1a1a1f;
+  --bg-highlight: #222228;
+  --txt-primary: #f2f4f8;
+  --txt-secondary: #a8aeb8;
+  --txt-tertiary: #6e747e;
 }
 
 html, body {
@@ -1476,25 +1504,31 @@ header button,
   border-radius: var(--echo-radius-pill) !important;
   background: currentColor !important;
   opacity: .36 !important;
-  animation: echo-ui-typing-dot 1.05s infinite ease-in-out !important;
+  transform-origin: 50% 50% !important;
+  will-change: transform, opacity !important;
+  animation: echo-ui-typing-dot .9s infinite ease-in-out both !important;
+}
+
+:where(.chat-typing-bubble span:first-child, .echobraid-typing span:first-child, .echo-ui-typing-dot:first-child, [data-typing] span:first-child) {
+  animation-delay: -240ms !important;
 }
 
 :where(.chat-typing-bubble span:nth-child(2), .echobraid-typing span:nth-child(2), .echo-ui-typing-dot:nth-child(2), [data-typing] span:nth-child(2)) {
-  animation-delay: 120ms !important;
+  animation-delay: -120ms !important;
 }
 
 :where(.chat-typing-bubble span:nth-child(3), .echobraid-typing span:nth-child(3), .echo-ui-typing-dot:nth-child(3), [data-typing] span:nth-child(3)) {
-  animation-delay: 240ms !important;
+  animation-delay: 0ms !important;
 }
 
 @keyframes echo-ui-typing-dot {
-  0%, 80%, 100% {
-    transform: translateY(0);
+  0%, 70%, 100% {
+    transform: translateY(0) scale(.82);
     opacity: .34;
   }
-  40% {
-    transform: translateY(-3px);
-    opacity: .86;
+  35% {
+    transform: translateY(-5px) scale(1.12);
+    opacity: .95;
   }
 }
 
@@ -2196,6 +2230,181 @@ header button,
   font-family: var(--echo-font-sans) !important;
 }
 
+/* Echo UI Dark Readability Contract v0.1.0 */
+:root[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background: var(--echo-bg) !important;
+  color: var(--echo-text) !important;
+}
+
+:root[data-theme="dark"] :where(.app, .main, .workspace, .stage, .document-host, .surface, .home-screen, .home-workbench, .home-main, .v4-shell, .v4-app, .v4-main, .v4-main-workspace, .workspace-shell, .workspace-page, .workspace-page-body, .content, main, section),
+body[data-theme="dark"] :where(.app, .main, .workspace, .stage, .document-host, .surface, .home-screen, .home-workbench, .home-main, .v4-shell, .v4-app, .v4-main, .v4-main-workspace, .workspace-shell, .workspace-page, .workspace-page-body, .content, main, section) {
+  background-color: var(--echo-bg) !important;
+  color: var(--echo-text) !important;
+}
+
+:root[data-theme="dark"] :where(.sidebar, .tasks, .v4-agent-rail, .oar-agent-panel, .oar-agent-shell, .oar-sdk-agent-root, #chat-mount, #chat-panel),
+body[data-theme="dark"] :where(.sidebar, .tasks, .v4-agent-rail, .oar-agent-panel, .oar-agent-shell, .oar-sdk-agent-root, #chat-mount, #chat-panel) {
+  background: var(--echo-bg-raised) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border) !important;
+}
+
+:root[data-theme="dark"] :where(.brand, .topbar, .tabs, .app-header, .workspace-header, .workspace-page-head, .v4-topbar, .v4-page-head, .tasks-hd, .panel-hd, .home-panel-head, .agent-rail-head, .oar-sdk-agent-header, header),
+body[data-theme="dark"] :where(.brand, .topbar, .tabs, .app-header, .workspace-header, .workspace-page-head, .v4-topbar, .v4-page-head, .tasks-hd, .panel-hd, .home-panel-head, .agent-rail-head, .oar-sdk-agent-header, header) {
+  background: var(--echo-bg-raised) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border) !important;
+}
+
+:root[data-theme="dark"] :where(.panel, .card, .agent-card, .stat-card, .metric-card, .home-metric-card, .home-panel, .home-history, .home-hero, .home-meter, .session-item.active, .session-item:hover, .home-session-card, .task-item, .recording-card, .voiceprint-intro, .voiceprint-add, .voiceprint-active-card, .voiceprint-ready-card, .voiceprint-preview, .dropzone, .engine-gate, .blocked-card, dialog, .dialog-card, .modal-card),
+body[data-theme="dark"] :where(.panel, .card, .agent-card, .stat-card, .metric-card, .home-metric-card, .home-panel, .home-history, .home-hero, .home-meter, .session-item.active, .session-item:hover, .home-session-card, .task-item, .recording-card, .voiceprint-intro, .voiceprint-add, .voiceprint-active-card, .voiceprint-ready-card, .voiceprint-preview, .dropzone, .engine-gate, .blocked-card, dialog, .dialog-card, .modal-card) {
+  background: var(--echo-bg-raised) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .22) !important;
+}
+
+:root[data-theme="dark"] :where(.dropzone p, .engine-gate p, .home-subtitle, .home-meter-label, .home-meter-note, .home-history-count, .home-session-meta, .status, .empty, .hint, .panel-hd, .sidebar-hd, .tasks-section-hd, .task-progress-detail, .workspace-page-sub, .home-sync-state, .home-panel-head p, .home-feed-more-link, .home-metric-label, .home-metric-card small, .home-metric-card em),
+body[data-theme="dark"] :where(.dropzone p, .engine-gate p, .home-subtitle, .home-meter-label, .home-meter-note, .home-history-count, .home-session-meta, .status, .empty, .hint, .panel-hd, .sidebar-hd, .tasks-section-hd, .task-progress-detail, .workspace-page-sub, .home-sync-state, .home-panel-head p, .home-feed-more-link, .home-metric-label, .home-metric-card small, .home-metric-card em) {
+  color: var(--echo-text-secondary) !important;
+}
+
+:root[data-theme="dark"] :where(h1, h2, h3, h4, .brand-name, .home-title, .home-history-title, .home-meter-value, .home-session-name, .panel-hd span:first-child, .tasks-hd, .dropzone h1, .engine-gate h1, .workspace-page-title, .v4-brand-title, .v4-page-title, .home-panel-head h2, .home-metric-card strong, .home-feed-item strong, .session-title, .task-text, .utterance-text, .summary-narrative, .recordings-hd),
+body[data-theme="dark"] :where(h1, h2, h3, h4, .brand-name, .home-title, .home-history-title, .home-meter-value, .home-session-name, .panel-hd span:first-child, .tasks-hd, .dropzone h1, .engine-gate h1, .workspace-page-title, .v4-brand-title, .v4-page-title, .home-panel-head h2, .home-metric-card strong, .home-feed-item strong, .session-title, .task-text, .utterance-text, .summary-narrative, .recordings-hd) {
+  color: var(--echo-text) !important;
+}
+
+:root[data-theme="dark"] :where(input, textarea, select, .sidebar-upload, .sidebar-settings, .home-secondary, .stop-btn, .quota, .chip, .pill, .tag, .badge, .icon-btn, .row-btn, .card-btn, .home-quota-inline, .v4-topbar select, .workspace-header select),
+body[data-theme="dark"] :where(input, textarea, select, .sidebar-upload, .sidebar-settings, .home-secondary, .stop-btn, .quota, .chip, .pill, .tag, .badge, .icon-btn, .row-btn, .card-btn, .home-quota-inline, .v4-topbar select, .workspace-header select) {
+  background: var(--echo-bg-panel) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border-strong) !important;
+}
+
+:root[data-theme="dark"] :where(.dropzone button, .dropzone .primary, .engine-gate button),
+body[data-theme="dark"] :where(.dropzone button, .dropzone .primary, .engine-gate button),
+:root[data-theme="dark"] input[type="file"]::file-selector-button,
+body[data-theme="dark"] input[type="file"]::file-selector-button {
+  background: var(--echo-accent) !important;
+  color: #ffffff !important;
+  border-color: color-mix(in oklab, var(--echo-accent) 82%, #ffffff 18%) !important;
+  box-shadow: 0 10px 24px color-mix(in oklab, var(--echo-accent) 28%, transparent) !important;
+}
+
+:root[data-theme="dark"] :where(.dropzone button:hover, .dropzone .primary:hover, .engine-gate button:hover),
+body[data-theme="dark"] :where(.dropzone button:hover, .dropzone .primary:hover, .engine-gate button:hover),
+:root[data-theme="dark"] input[type="file"]::file-selector-button:hover,
+body[data-theme="dark"] input[type="file"]::file-selector-button:hover {
+  filter: brightness(1.08) !important;
+}
+
+:root[data-theme="dark"] :where(input::placeholder, textarea::placeholder),
+body[data-theme="dark"] :where(input::placeholder, textarea::placeholder) {
+  color: var(--echo-text-muted) !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="dark"] :where(.home-feed-item, .feed-item, .task-progress, .research-result, .summary-list li, .summary-item.overall-summary, .recordings, .upload-loading-card, .pdf-status),
+body[data-theme="dark"] :where(.home-feed-item, .feed-item, .task-progress, .research-result, .summary-list li, .summary-item.overall-summary, .recordings, .upload-loading-card, .pdf-status) {
+  background: var(--echo-bg-panel) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border) !important;
+}
+
+:root[data-theme="dark"] :where(.sidebar-footer, .agent-sdk-suggestions, .chat-suggest, .echobraid-composer, .agent-composer, .oar-agent-composer, .oar-sdk-agent-composer),
+body[data-theme="dark"] :where(.sidebar-footer, .agent-sdk-suggestions, .chat-suggest, .echobraid-composer, .agent-composer, .oar-agent-composer, .oar-sdk-agent-composer) {
+  background: var(--echo-bg-raised) !important;
+  border-color: var(--echo-border) !important;
+}
+
+:root[data-theme="dark"] :where(.echobraid-bubble--in, .chat-msg.assistant .chat-bubble, .chat-message.agent, .chat-message.assistant, .agent-rail-message--in .agent-rail-bubble, .oar-sdk-agent-message--in .oar-sdk-agent-bubble, .oar-agent-message--in .oar-agent-bubble),
+body[data-theme="dark"] :where(.echobraid-bubble--in, .chat-msg.assistant .chat-bubble, .chat-message.agent, .chat-message.assistant, .agent-rail-message--in .agent-rail-bubble, .oar-sdk-agent-message--in .oar-sdk-agent-bubble, .oar-agent-message--in .oar-agent-bubble) {
+  background: var(--echo-bg-panel) !important;
+  color: var(--echo-text) !important;
+  border-color: var(--echo-border) !important;
+}
+
+:root[data-theme="dark"] :where(.surface iframe, .pdf-page canvas),
+body[data-theme="dark"] :where(.surface iframe, .pdf-page canvas) {
+  background: #ffffff !important;
+}
+
+`;
+
+const THEME_RUNTIME = `
+<script>
+/* Echo UI Theme Runtime v0.1.0 */
+(function () {
+  if (window.__EchoUIThemeInstalled) return;
+  window.__EchoUIThemeInstalled = true;
+
+  const STORE_KEY = 'echo.ui.theme';
+  const MODES = ['light', 'dark'];
+
+  function normalizeTheme(mode) {
+    return mode === 'dark' ? 'dark' : 'light';
+  }
+
+  function preferredTheme() {
+    try {
+      const saved = localStorage.getItem(STORE_KEY);
+      if (MODES.includes(saved)) return saved;
+    } catch (_) {}
+    try {
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } catch (_) {
+      return 'light';
+    }
+  }
+
+  function applyTheme(mode, themePayload) {
+    const next = normalizeTheme(mode);
+    const root = document.documentElement;
+    root.setAttribute('data-theme', next);
+    root.style.colorScheme = next;
+    root.dataset.echoTheme = next;
+    if (document.body) {
+      document.body.setAttribute('data-theme', next);
+      document.body.style.colorScheme = next;
+    }
+    try { localStorage.setItem(STORE_KEY, next); } catch (_) {}
+    window.dispatchEvent(new CustomEvent('echo-ui-theme-applied', {
+      detail: { mode: next, themePayload: themePayload || null }
+    }));
+    return next;
+  }
+
+  function setTheme(mode, themePayload) {
+    if (!MODES.includes(mode)) return getTheme();
+    return applyTheme(mode, themePayload);
+  }
+
+  function getTheme() {
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (MODES.includes(attr)) return attr;
+    try {
+      const saved = localStorage.getItem(STORE_KEY);
+      if (MODES.includes(saved)) return saved;
+    } catch (_) {}
+    return preferredTheme();
+  }
+
+  function handleThemeRequest(event) {
+    const detail = event && event.detail;
+    const mode = typeof detail === 'string' ? detail : detail && detail.mode;
+    if (MODES.includes(mode)) setTheme(mode, detail);
+  }
+
+  window.EchoTheme = Object.assign(window.EchoTheme || {}, { setTheme, getTheme, apply: applyTheme });
+  window.__echobraidSetTheme = setTheme;
+  window.addEventListener('echobraid:theme-request', handleThemeRequest);
+
+  const boot = () => applyTheme(preferredTheme());
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
+})();
+</script>
 `;
 
 const ICON_RUNTIME = `
@@ -2330,7 +2539,13 @@ const CHAT_RUNTIME = `
     '.chat-message',
     '.agent-rail-message',
     '.oar-sdk-agent-message',
-    '.oar-agent-message'
+    '.oar-agent-message',
+    '[data-role="user"]',
+    '[data-role="assistant"]',
+    '[data-role="agent"]',
+    '[data-message-role="user"]',
+    '[data-message-role="assistant"]',
+    '[data-message-role="agent"]'
   ].join(',');
   const outgoingSelector = [
     '.echobraid-bubble-row--out',
@@ -2338,7 +2553,25 @@ const CHAT_RUNTIME = `
     '.chat-message.user',
     '.agent-rail-message--out',
     '.oar-sdk-agent-message--out',
-    '.oar-agent-message--out'
+    '.oar-agent-message--out',
+    '[data-role="user"]',
+    '[data-message-role="user"]',
+    '[data-author="user"]'
+  ].join(',');
+  const incomingSelector = [
+    '.echobraid-bubble-row--in',
+    '.chat-msg.assistant',
+    '.chat-msg.tool',
+    '.chat-msg.err',
+    '.chat-message.agent',
+    '.chat-message.assistant',
+    '.agent-rail-message--in',
+    '.oar-sdk-agent-message--in',
+    '.oar-agent-message--in',
+    '[data-role="assistant"]',
+    '[data-role="agent"]',
+    '[data-message-role="assistant"]',
+    '[data-message-role="agent"]'
   ].join(',');
   const emptySelector = [
     '.echobraid-empty-state',
@@ -2441,10 +2674,18 @@ const CHAT_RUNTIME = `
     return normalizeText(clone.textContent);
   }
 
-  function hasOutgoingMessage(root, text) {
+  function isGeneratedUser(node) {
+    return node.getAttribute('data-echo-ui-user') === '1';
+  }
+
+  function hasOutgoingMessage(root, text, options = {}) {
     const needle = normalizeText(text);
     if (!needle) return true;
-    return Array.from(root.querySelectorAll(outgoingSelector)).some((node) => messageText(node) === needle);
+    const includeGenerated = options.includeGenerated !== false;
+    return Array.from(root.querySelectorAll(outgoingSelector)).some((node) => {
+      if (!includeGenerated && isGeneratedUser(node)) return false;
+      return messageText(node) === needle;
+    });
   }
 
   function generatedUsers(root) {
@@ -2454,8 +2695,20 @@ const CHAT_RUNTIME = `
   function removeDuplicateGeneratedUsers(root) {
     generatedUsers(root).forEach((generated) => {
       const text = generated.getAttribute('data-echo-ui-user-text') || messageText(generated);
-      const duplicate = Array.from(root.querySelectorAll(outgoingSelector)).some((node) => node !== generated && !node.hasAttribute('data-echo-ui-user') && messageText(node) === text);
+      const duplicate = Array.from(root.querySelectorAll(outgoingSelector)).some((node) => node !== generated && !isGeneratedUser(node) && messageText(node) === text);
       if (duplicate) generated.remove();
+    });
+  }
+
+  function removeEmptyWaitingPlaceholders(root) {
+    const hasTyping = !!root.querySelector('[data-echo-ui-typing="1"], .chat-typing-bubble, .chat-typing, .echobraid-typing, [data-typing]');
+    if (!hasTyping) return;
+    root.querySelectorAll(incomingSelector).forEach((node) => {
+      if (node.matches('[data-echo-ui-typing="1"], .chat-typing, .echo-ui-generated-typing')) return;
+      if (node.querySelector('[data-echo-ui-typing="1"], .chat-typing-bubble, .echobraid-typing, [data-typing]')) return;
+      if (messageText(node)) return;
+      if (node.querySelector('img, svg, canvas, video, audio, button, input, textarea, pre, code')) return;
+      node.remove();
     });
   }
 
@@ -2531,7 +2784,7 @@ const CHAT_RUNTIME = `
     root.querySelectorAll('[data-echo-ui-typing="1"]').forEach((typing) => {
       let next = typing.nextElementSibling;
       while (next) {
-        if (!next.matches('[data-echo-ui-typing="1"]') && next.matches('.echobraid-bubble-row--in, .chat-msg.assistant, .chat-message.agent, .agent-rail-message--in, .oar-sdk-agent-message--in, .oar-agent-message--in')) {
+        if (!next.matches('[data-echo-ui-typing="1"]') && next.matches(incomingSelector)) {
           typing.remove();
           return;
         }
@@ -2578,6 +2831,7 @@ const CHAT_RUNTIME = `
 
   function updateRoot(root) {
     removeDuplicateGeneratedUsers(root);
+    removeEmptyWaitingPlaceholders(root);
     const has = hasRealMessage(root);
     root.classList.toggle('echo-ui-chat-has-messages', has);
     removeResolvedTyping(root);
@@ -2628,21 +2882,47 @@ const CHAT_RUNTIME = `
     });
   }
 
+  const recentSends = new WeakMap();
+
+  function shouldHandleSend(source, text) {
+    if (!text) return false;
+    const root = rootFor(source);
+    if (!root) return false;
+    const now = Date.now();
+    const previous = recentSends.get(root);
+    if (previous && previous.text === text && now - previous.at < 650) return false;
+    recentSends.set(root, { text, at: now });
+    return true;
+  }
+
+  function scheduleUserFallback(source, text) {
+    if (!text) return;
+    [180, 420].forEach((delay) => {
+      window.setTimeout(() => {
+        const root = rootFor(source);
+        if (!root) return;
+        removeDuplicateGeneratedUsers(root);
+        if (!hasOutgoingMessage(root, text)) insertUserMessage(source, text);
+        updateAll();
+      }, delay);
+    });
+  }
+
   function afterSend(source) {
     const text = draftFor(source);
+    if (!shouldHandleSend(source, text)) return;
     window.setTimeout(() => {
-      insertUserMessage(source, text);
       clearComposer(source);
       showTyping(source);
       updateAll();
     }, 0);
     window.setTimeout(() => {
-      insertUserMessage(source, text);
       clearComposer(source);
       showTyping(source);
       updateAll();
     }, 80);
-    window.setTimeout(updateAll, 220);
+    scheduleUserFallback(source, text);
+    window.setTimeout(updateAll, 520);
   }
 
   document.addEventListener('submit', (event) => {
@@ -2672,7 +2952,7 @@ const CHAT_RUNTIME = `
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateAll, { once: true });
   else updateAll();
-  window.EchoUIChat = Object.assign(window.EchoUIChat || {}, { refresh: updateAll, clearComposer, showTyping, insertUserMessage });
+  window.EchoUIChat = Object.assign(window.EchoUIChat || {}, { refresh: updateAll, clearComposer, showTyping, insertUserMessage, scheduleUserFallback });
 })();
 </script>
 `;
@@ -2685,20 +2965,11 @@ const I18N_RUNTIME = `
   window.__EchoUII18nInstalled = true;
 
   const STORE_KEY = 'echo.ui.locale';
-  const modes = ['zh', 'en', 'both'];
+  const modes = ['zh', 'en'];
   const cjkRe = /[\\u3400-\\u9fff]/;
   const skipSelector = [
     '[data-echo-i18n-ignore]',
-    '.echobraid-bubble',
-    '.echobraid-bubble-row',
-    '.chat-bubble',
-    '.chat-msg',
-    '.chat-message',
-    '.agent-rail-message',
-    '.oar-agent-message',
-    '.oar-sdk-agent-message',
     '.history-message-content',
-    '.transcript',
     '.utterance',
     '.monologue',
     '.message-content',
@@ -2710,6 +2981,19 @@ const I18N_RUNTIME = `
   const attrNames = ['placeholder', 'title', 'aria-label', 'alt', 'data-tooltip'];
   const valueTypes = /^(button|submit|reset)$/i;
   const originals = new WeakMap();
+  const userContentSelector = [
+    '[data-role="user"]',
+    '[data-message-role="user"]',
+    '[data-author="user"]',
+    '.echobraid-bubble-row--out',
+    '.chat-msg.user',
+    '.chat-message.user',
+    '.agent-rail-message--out',
+    '.oar-agent-message--out',
+    '.oar-sdk-agent-message--out',
+    '.msg-user',
+    '.meagent-msg.user'
+  ].join(',');
 
   const pairs = [
     ['小智 控制台', 'Xiaozhi Console'],
@@ -2843,6 +3127,7 @@ const I18N_RUNTIME = `
     ['EchoAgent 未启动或模型未配置。请先在 EchoBraid 设置里保存模型配置，再重试。', 'EchoAgent is not running or the model is not configured. Save the model settings in EchoBraid, then try again.'],
     ['EchoAgent 未启动或模型未配置', 'EchoAgent is not running or the model is not configured'],
     ['未启动或模型未配置。请先在 EchoBraid 设置里保存模型配置，再重试。', 'is not running or the model is not configured. Save the model settings in EchoBraid, then try again.'],
+    ['Agent 暂时没拿到模型回复，所以没有执行写入。请稍后重试；这次没有创建任何成员。', 'Agent has not received a model reply yet, so nothing was written. Please try again later; no members were created this time.'],
     ['无法使用麦克风，请检查系统麦克风权限', 'Cannot access the microphone. Check system microphone permissions.'],
     ['没有听到清晰人声，请重新录一次', 'No clear speech was detected. Please record again.'],
     ['转写重连中…', 'Reconnecting transcription...'],
@@ -2851,6 +3136,8 @@ const I18N_RUNTIME = `
 
     ['导入文件', 'Import File'],
     ['拖入 docx、xlsx、pptx、pdf。Office 文件使用本地 ONLYOFFICE 真实编辑 surface；PDF 使用 PDF.js 只读预览。', 'Drop docx, xlsx, pptx, or pdf files. Office files use a real local ONLYOFFICE editing surface; PDFs open in read-only PDF.js preview.'],
+    ['拖入 docx、xlsx、pptx、pdf。Office 文件只接受本地 ONLYOFFICE 真实编辑 surface；PDF 使用 PDF.js 只读预览。', 'Drop docx, xlsx, pptx, or pdf files. Office files only use the local ONLYOFFICE editing surface; PDFs open in read-only PDF.js preview.'],
+    ['拖入 docx、xlsx、pptx、pdf。Office 文件只接受本地 ONLYOFFICE 真实可编辑 surface；PDF 使用 PDF.js 只读预览。', 'Drop docx, xlsx, pptx, or pdf files. Office files only use the local ONLYOFFICE editable surface; PDFs open in read-only PDF.js preview.'],
     ['选择文件', 'Choose File'],
     ['正在检查 Office 依赖组件...', 'Checking Office dependencies...'],
     ['正在下载 / 校验 / 部署 / 启动本地 Office 编辑服务...', 'Downloading / Verifying / Deploying / Starting the local Office editing service...'],
@@ -2884,6 +3171,7 @@ const I18N_RUNTIME = `
     ['leo的团队', 'Leo’s Team'],
     ['云端连接中', 'Connecting to cloud'],
     ['我的待办', 'My Todos'],
+    ['待办', 'Todos'],
     ['目标概览', 'Objective Overview'],
     ['暂无待办', 'No todos'],
     ['暂无动态。', 'No activity yet.'],
@@ -3145,6 +3433,7 @@ const I18N_RUNTIME = `
     [/^已同步\\s+(.+)\\s+条远端变更$/, 'Synced $1 remote changes'],
     [/^(\\d+)\\s+个 KR$/, '$1 KRs'],
     [/^(\\d+)\\s+设备$/, '$1 devices'],
+    [/^(\\d+)\\s+待办$/, '$1 todos'],
     [/^更新于\\s+(.+)$/, 'Updated $1'],
     [/^最近\\s+(\\d+)\\s+条团队变化。$/, 'Latest $1 team updates.']
   ];
@@ -3171,13 +3460,13 @@ const I18N_RUNTIME = `
     const en = englishFor(original);
     if (!en) return original;
     if (locale === 'en') return en;
-    if (locale === 'both') return normalize(original) + ' / ' + en;
     return original;
   }
 
   function shouldSkipElement(el) {
     if (!el) return true;
     if (/^(SCRIPT|STYLE|TEXTAREA|INPUT|CODE|PRE|NOSCRIPT|SVG|CANVAS)$/i.test(el.tagName)) return true;
+    if (el.closest(userContentSelector)) return true;
     return !!el.closest(skipSelector);
   }
 
@@ -3244,7 +3533,14 @@ const I18N_RUNTIME = `
     const next = modes.includes(locale) ? locale : 'zh';
     localStorage.setItem(STORE_KEY, next);
     apply(document.body || document.documentElement);
+    return next;
   }
+
+  window.addEventListener('echobraid:locale-request', (event) => {
+    const detail = event && event.detail;
+    const locale = typeof detail === 'string' ? detail : detail && detail.locale;
+    if (modes.includes(locale)) setLocale(locale);
+  });
 
   function boot() {
     apply(document.body || document.documentElement);
@@ -3304,6 +3600,10 @@ function stripChatRuntime(html) {
   return html.replace(/\n?<script>\s*\/\* Echo UI Chat Behavior Runtime v0\.1\.0 \*\/[\s\S]*?<\/script>\n?/g, '\n');
 }
 
+function stripThemeRuntime(html) {
+  return html.replace(/\n?<script>\s*\/\* Echo UI Theme Runtime v0\.1\.0 \*\/[\s\S]*?<\/script>\n?/g, '\n');
+}
+
 function stripI18nRuntime(html) {
   return html.replace(/\n?<script>\s*\/\* Echo UI I18N Runtime v0\.1\.0 \*\/[\s\S]*?<\/script>\n?/g, '\n');
 }
@@ -3315,8 +3615,8 @@ function injectStyle(html) {
 }
 
 function injectRuntime(html) {
-  const clean = stripI18nRuntime(stripChatRuntime(stripIconRuntime(html)));
-  return clean.replace(/<\/body>/i, `${ICON_RUNTIME}\n${CHAT_RUNTIME}\n${I18N_RUNTIME}\n</body>`);
+  const clean = stripI18nRuntime(stripThemeRuntime(stripChatRuntime(stripIconRuntime(html))));
+  return clean.replace(/<\/body>/i, `${ICON_RUNTIME}\n${THEME_RUNTIME}\n${CHAT_RUNTIME}\n${I18N_RUNTIME}\n</body>`);
 }
 
 function normalizeHtml(html) {
@@ -3405,6 +3705,9 @@ function updateChangelog(app) {
     '- Hide app-local language and theme toggle buttons; locale and color mode are controlled by the platform while both modes remain supported.',
     '- Preserve sent user chat bubbles before showing the waiting indicator, with duplicate cleanup when native rendering catches up.',
     '- Flatten home toolbar/list alignment so search rows and cards align with page titles without an extra surface.',
+    '- Delay generated chat fallback bubbles until native message rendering settles, preventing duplicate sent messages.',
+    '- Remove empty assistant waiting placeholders so the shared three-dot typing state is the only visible waiting bubble.',
+    '- Align Xiaozhi home list and empty-state tracks with the title/search row across card counts.',
     '',
     ''
   ].join('\n');
@@ -3437,12 +3740,77 @@ function refactorZipApp(app) {
       let text = read(js);
       text = text.replace("tool: '⚙'", "tool: 'tool'");
       text = text.replace(/<span class="chat-title-icon">💬<\/span>/g, '<span class="chat-title-icon" data-echo-icon="chat" aria-hidden="true"></span>');
+      text = text.replace('const gridWrap = el(\'div\');', 'const gridWrap = el(\'div\', { class: \'agent-list-track\' });');
       write(js, text);
     }
     const css = path.join(tmpRoot, 'app.css');
     if (fs.existsSync(css)) {
       let text = read(css);
       text = text.replace("content: '💡';", "content: ''; width: 16px; height: 16px; margin-top: 1px; background: currentColor; -webkit-mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3Cpath d='M8.5 14.5A6 6 0 1 1 15.5 14.5c-.8.6-1.2 1.4-1.4 2.5H9.9c-.2-1.1-.6-1.9-1.4-2.5Z'/%3E%3C/svg%3E\") center / contain no-repeat; mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6'/%3E%3Cpath d='M10 22h4'/%3E%3Cpath d='M8.5 14.5A6 6 0 1 1 15.5 14.5c-.8.6-1.2 1.4-1.4 2.5H9.9c-.2-1.1-.6-1.9-1.4-2.5Z'/%3E%3C/svg%3E\") center / contain no-repeat;");
+      if (!text.includes('Echo UI Xiaozhi Home Track Alignment Guard v0.1.0')) {
+        text += `
+
+/* Echo UI Xiaozhi Home Track Alignment Guard v0.1.0 */
+main#content > .page-hero,
+main#content > .toolbar,
+main#content > .agent-list-track,
+main#content > .pagination {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+main#content > .agent-list-track {
+  display: block !important;
+}
+
+main#content .agent-grid {
+  width: 100% !important;
+  max-width: none !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: var(--echo-space-xl) !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+}
+
+@media (min-width: 760px) {
+  main#content .agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1120px) {
+  main#content .agent-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1480px) {
+  main#content .agent-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+main#content .agent-grid .agent-card {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+main#content > .agent-list-track > .empty {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 220px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+`;
+      }
       write(css, text);
     }
   }
