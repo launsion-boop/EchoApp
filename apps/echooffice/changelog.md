@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.10 - 2026-05-08
+
+- Fix the dark-mode engine-installing surface so the top strip follows the dark background instead of the old light gradient.
+
 ## 0.2.9 - 2026-05-08
 
 - Normalize the app display name, summary, and description so catalog metadata describes product function instead of internal version labels or visual style.
