@@ -1,3 +1,7 @@
+## 4.0.20 - 2026-05-08
+
+- Fix the dark-mode create/join team segmented control so inactive tabs no longer render with a white background.
+
 ## 4.0.19 - 2026-05-08
 
 - Regenerate the packaged manifest entries so the dark-mode repair package passes install-pipeline size and hash validation.
