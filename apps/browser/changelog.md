@@ -1,3 +1,7 @@
+## 1.0.7 - 2026-05-08
+
+- Fix the packaged manifest metadata so the install pipeline receives string name and description fields.
+
 # Changelog
 
 ## 1.0.6 - 2026-05-08

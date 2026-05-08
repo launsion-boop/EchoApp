@@ -140,8 +140,14 @@ function validateZipEchoFile(echoPath, app) {
   if (manifest.id !== app.id) {
     fail(`${relative(echoPath)} manifest.id (${manifest.id}) must match app.json id (${app.id})`);
   }
+  if (typeof manifest.name !== 'string' || manifest.name.length === 0) {
+    fail(`${relative(echoPath)} manifest.name must be a non-empty string`);
+  }
   if (manifest.version !== app.version) {
     fail(`${relative(echoPath)} manifest.version (${manifest.version}) must match app.json version (${app.version})`);
+  }
+  if (typeof manifest.description !== 'string' || manifest.description.length === 0) {
+    fail(`${relative(echoPath)} manifest.description must be a non-empty string`);
   }
 
   const source = manifest.update_source;

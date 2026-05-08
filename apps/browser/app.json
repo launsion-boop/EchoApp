@@ -5,7 +5,7 @@
     "zh-CN": "浏览器",
     "en": "Browser"
   },
-  "version": "1.0.6",
+  "version": "1.0.7",
   "category": "productivity",
   "summary": {
     "zh-CN": "Chromium 浏览器与 EchoAgent 页面助手",
@@ -36,7 +36,7 @@
     "host.embedded_webview",
     "echoagent_invoke"
   ],
-  "updated_at": "2026-05-08T02:30:00Z",
+  "updated_at": "2026-05-08T02:39:42Z",
   "changelog": "changelog.md",
   "color": "#3b82f6",
   "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c3 3 4.5 6 4.5 9S15 18 12 21M12 3c-3 3-4.5 6-4.5 9S9 18 12 21'/><circle cx='12' cy='12' r='2' fill='currentColor' stroke='none'/></g>"
