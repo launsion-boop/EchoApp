@@ -14,7 +14,7 @@ const TARGETS = [
   { slug: 'echo-console', kind: 'zip', files: ['index.html'] }
 ];
 
-const BROWSER_ROOT = '/Users/pc/Desktop/echobraid/packages/factory-apps/browser';
+let BROWSER_ROOT = null;
 const REQUIRED_STYLE_MARKER = 'Echo UI Design System v0.1.4';
 const REQUIRED_ASSISTANT_MARKER = 'Echo UI Assistant Rail Contract v0.1.0';
 const REQUIRED_ASSISTANT_HEADER_ALIGN_MARKER = 'Echo UI Agent Header Alignment Guard v0.1.0';
@@ -287,6 +287,7 @@ for (const target of TARGETS) {
   }
 }
 
+BROWSER_ROOT = unpack('browser');
 const browserManifest = JSON.parse(read(path.join(BROWSER_ROOT, 'manifest.json')));
 auditManifest('browser', browserManifest, path.join(BROWSER_ROOT, 'manifest.json'));
 auditIconFile('browser', path.join(BROWSER_ROOT, 'icons/icon.svg'));

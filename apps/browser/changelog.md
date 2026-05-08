@@ -1,0 +1,7 @@
+# Changelog
+
+## 1.0.5 - 2026-05-08
+
+- Copy the Browser factory app into the EchoApp catalog for unified app delivery.
+- Preserve the EchoAgent sidebar dark-mode, bilingual, and shared chat input fixes from the echobraid factory app.
+- Point update metadata at `launsion-boop/EchoApp` so EchoApp can publish browser updates directly.

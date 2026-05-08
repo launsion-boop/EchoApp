@@ -1,0 +1,43 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "browser",
+  "name": {
+    "zh-CN": "浏览器",
+    "en": "Browser"
+  },
+  "version": "1.0.5",
+  "category": "productivity",
+  "summary": {
+    "zh-CN": "Chromium 浏览器，内置 EchoAgent 页面助手",
+    "en": "Chromium browser with an EchoAgent page assistant"
+  },
+  "description": {
+    "zh-CN": "浏览器提供 Chromium 页面浏览、持久登录态、标签页与地址栏，并内置 EchoAgent 侧栏，让 agent 可以围绕当前页面进行整理、问答和辅助操作。",
+    "en": "Browser provides Chromium browsing, persistent login state, tabs, and an address bar with an embedded EchoAgent sidebar for page-aware organization, Q&A, and assistance."
+  },
+  "tags": [
+    "browser",
+    "chromium",
+    "web",
+    "echoagent",
+    "productivity"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/browser/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "ui",
+    "network",
+    "storage",
+    "host.embedded_webview",
+    "echoagent_invoke"
+  ],
+  "updated_at": "2026-05-08T02:10:00Z",
+  "changelog": "changelog.md",
+  "color": "#3b82f6",
+  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c3 3 4.5 6 4.5 9S15 18 12 21M12 3c-3 3-4.5 6-4.5 9S9 18 12 21'/><circle cx='12' cy='12' r='2' fill='currentColor' stroke='none'/></g>"
+}
