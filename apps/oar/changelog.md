@@ -1,3 +1,7 @@
+## 4.0.18 - 2026-05-08
+
+- Restore complete dark-mode rendering for OAR setup and workspace screens, and remove internal light-mode hardcoding.
+
 # Changelog
 
 ## 4.0.17 - 2026-05-08
