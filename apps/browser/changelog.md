@@ -1,3 +1,7 @@
+## 1.0.8 - 2026-05-08
+
+- Regenerate the packaged manifest entries so claw.json passes install-pipeline size and hash validation.
+
 ## 1.0.7 - 2026-05-08
 
 - Fix the packaged manifest metadata so the install pipeline receives string name and description fields.

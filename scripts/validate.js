@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 const { execFileSync } = require('node:child_process');
-const { existsSync, readFileSync, statSync } = require('node:fs');
+const { createHash } = require('node:crypto');
+const { existsSync, mkdtempSync, readFileSync, rmSync, statSync } = require('node:fs');
+const { tmpdir } = require('node:os');
 const { dirname, join, resolve } = require('node:path');
 
 const ROOT = resolve(__dirname, '..');
@@ -119,6 +121,66 @@ function validateEchoFile(appDir, app, context) {
   }
 }
 
+function validateZipEntries(echoPath, manifest) {
+  if (!Array.isArray(manifest.entries)) {
+    fail(`${relative(echoPath)} manifest.entries must be an array`);
+    return;
+  }
+
+  const tmp = mkdtempSync(join(tmpdir(), 'echoapp-validate-'));
+  try {
+    execFileSync('unzip', ['-q', echoPath, '-d', tmp], {
+      cwd: ROOT,
+      stdio: ['ignore', 'ignore', 'ignore'],
+    });
+
+    const seen = new Set();
+    for (const entry of manifest.entries) {
+      if (!entry || typeof entry !== 'object') {
+        fail(`${relative(echoPath)} manifest.entries must contain objects`);
+        continue;
+      }
+      const rel = entry.path;
+      if (typeof rel !== 'string' || rel.length === 0 || rel.includes('..') || rel.startsWith('/')) {
+        fail(`${relative(echoPath)} manifest entry path must be a safe relative string`);
+        continue;
+      }
+      seen.add(rel);
+      const filePath = join(tmp, rel);
+      if (!existsSync(filePath) || !statSync(filePath).isFile()) {
+        fail(`${relative(echoPath)} manifest entry does not exist in package: ${rel}`);
+        continue;
+      }
+      const bytes = readFileSync(filePath);
+      const actualHash = createHash('sha256').update(bytes).digest('hex');
+      if (entry.size !== bytes.length) {
+        fail(`${relative(echoPath)} manifest entry ${rel} size ${entry.size} must equal actual ${bytes.length}`);
+      }
+      if (entry.sha256 !== actualHash) {
+        fail(`${relative(echoPath)} manifest entry ${rel} sha256 does not match actual file`);
+      }
+    }
+
+    const listed = [];
+    function walk(dir) {
+      const { readdirSync } = require('node:fs');
+      const { relative: relPath, sep } = require('node:path');
+      for (const dirent of readdirSync(dir, { withFileTypes: true })) {
+        const full = join(dir, dirent.name);
+        const rel = relPath(tmp, full).split(sep).join('/');
+        if (dirent.isDirectory()) walk(full);
+        else if (rel !== 'manifest.json') listed.push(rel);
+      }
+    }
+    walk(tmp);
+    for (const rel of listed) {
+      if (!seen.has(rel)) fail(`${relative(echoPath)} manifest.entries missing package file: ${rel}`);
+    }
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 function validateZipEchoFile(echoPath, app) {
   let manifest;
   try {
@@ -154,6 +216,8 @@ function validateZipEchoFile(echoPath, app) {
   if (!source || source.type !== 'github' || source.repo !== REPO || source.app_path !== app.update_source.app_path) {
     fail(`${relative(echoPath)} manifest.update_source must match app.json update_source`);
   }
+
+  validateZipEntries(echoPath, manifest);
 }
 
 function validateApp(appEntry) {

@@ -1,3 +1,7 @@
+## 4.0.19 - 2026-05-08
+
+- Regenerate the packaged manifest entries so the dark-mode repair package passes install-pipeline size and hash validation.
+
 ## 4.0.18 - 2026-05-08
 
 - Restore complete dark-mode rendering for OAR setup and workspace screens, and remove internal light-mode hardcoding.
