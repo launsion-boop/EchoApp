@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.11 - 2026-05-08
+
+- Align the document tab strip with light and dark themes; active documents now use a bottom accent line instead of a large selected block.
+
 ## 0.2.10 - 2026-05-08
 
 - Fix the dark-mode engine-installing surface so the top strip follows the dark background instead of the old light gradient.
