@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.9 - 2026-05-08
+
+- Normalize the app display name, summary, and description so catalog metadata describes product function instead of internal version labels or visual style.
+
 ## 2.0.8 - 2026-05-07
 
 - Apply the EchoApp shared Design Hub design system across fonts, spacing, radius, controls, themes, and SVG icon handling.

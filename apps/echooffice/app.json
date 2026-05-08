@@ -5,15 +5,15 @@
     "zh-CN": "EchoOffice",
     "en": "EchoOffice"
   },
-  "version": "0.2.8",
+  "version": "0.2.9",
   "category": "productivity",
   "summary": {
-    "zh-CN": "AI 优先的 Office 文档工作台",
-    "en": "AI-first Office document workbench"
+    "zh-CN": "Office/PDF 文档预览与 AI 改写工作台",
+    "en": "Office/PDF preview and AI editing workspace"
   },
   "description": {
-    "zh-CN": "EchoOffice 打开本地 DOCX、XLSX、PPTX 和 PDF 文件，把真实 ONLYOFFICE 文档编辑界面与 EchoAgent 文档改写能力连接起来。文档编辑发生在本地 workspace 副本中，便于预览、刷新和后续导出。",
-    "en": "EchoOffice opens local DOCX, XLSX, PPTX, and PDF files, connecting a real ONLYOFFICE editing surface with EchoAgent-powered document edits. Changes are applied to local workspace copies for visible reloads, review, and later export."
+    "zh-CN": "EchoOffice 用于打开 DOCX、XLSX、PPTX 和 PDF 文件，连接本地文档预览/编辑能力与 EchoAgent，支持围绕当前文档进行查询、整理和改写。",
+    "en": "EchoOffice opens DOCX, XLSX, PPTX, and PDF files, connecting local document preview/editing with EchoAgent for document Q&A, organization, and rewriting."
   },
   "tags": [
     "office",
@@ -39,7 +39,7 @@
     "app_comm",
     "mcp"
   ],
-  "updated_at": "2026-05-07T03:15:00Z",
+  "updated_at": "2026-05-08T02:30:00Z",
   "changelog": "changelog.md",
   "color": "#d45b35",
   "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 3.8h8.2l3.8 3.8v12.6h-12a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z'/><path d='M14.5 4v4h4M8 11h7M8 14h7M8 17h3.5M13.5 16h3.2M13.5 18.5h3.2'/></g>"

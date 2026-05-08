@@ -1,14 +1,13 @@
-# Echo Console · Echo 控制台
+# Echo 控制台
 
-A dark sci-fi HUD that turns EchoBraid into a single-screen central control wall.
+Echo 控制台用于集中查看 EchoBraid 的运行状态。
 
 ## Highlights
 
-- **5 clickable KPI tiles** — current AI, schedules, L3·L2 memory, skills, core files
-- **Stage panel swaps** with the active KPI: memory constellation / schedule list / AI detail / skill catalog / core file list
-- **Right rail stays docked** with topic matrix, timeline and pulse feed
-- **HUD aesthetic** — corner brackets, neon accents, mono numerals, blinking cursor
-- **No scrolling** — fixed-viewport layout designed for a desktop window
+- **Status overview** — current AI, scheduled tasks, memory layers, skills, and core files.
+- **Interactive detail panels** — switch between memory constellation, schedule list, AI detail, skill catalog, and core-file list.
+- **Operations context** — topic distribution, timeline, and activity feed stay visible for diagnostics.
+- **Platform settings** — theme and language are controlled by EchoBraid, while the app keeps readable light and dark modes.
 
 ## Update Source
 

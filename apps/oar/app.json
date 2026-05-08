@@ -2,18 +2,18 @@
   "schema": "echoapp-app/v1",
   "id": "app.local.oar",
   "name": {
-    "zh-CN": "OAR v4",
-    "en": "OAR v4"
+    "zh-CN": "OAR",
+    "en": "OAR"
   },
-  "version": "4.0.16",
+  "version": "4.0.17",
   "category": "productivity",
   "summary": {
-    "zh-CN": "Objective / Agent / Result 云团队工作台",
-    "en": "Cloud team workspace for Objective, Agent, and Result"
+    "zh-CN": "团队目标、待办与 Agent 协作工作台",
+    "en": "Team objectives, todos, and Agent collaboration"
   },
   "description": {
-    "zh-CN": "OAR v4 用于团队目标拆解、Agent 协作、Result 跟踪和云端同步。",
-    "en": "OAR v4 manages team objectives, Agent collaboration, result tracking, and cloud sync."
+    "zh-CN": "OAR 用于创建和管理团队目标、待办事项、成员与 Agent 协作、执行结果和最新动态，并与云端同步。",
+    "en": "OAR manages team objectives, todos, member and Agent collaboration, execution results, latest activity, and cloud sync."
   },
   "tags": [
     "okr",
@@ -43,7 +43,7 @@
     "lan_network",
     "domain_seed"
   ],
-  "updated_at": "2026-05-07T03:15:00Z",
+  "updated_at": "2026-05-08T02:30:00Z",
   "changelog": "changelog.md",
   "color": "#2563eb",
   "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.2'/><circle cx='12' cy='12' r='4.6'/><circle cx='12' cy='12' r='1.5' fill='currentColor' stroke='none'/><path d='M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3'/></g>"

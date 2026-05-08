@@ -1,6 +1,6 @@
 {
   "schema": "echoapp-catalog/v1",
-  "updated_at": "2026-05-08T02:10:00Z",
+  "updated_at": "2026-05-08T02:30:00Z",
   "apps": [
     {
       "id": "app.local.earth-garden",
