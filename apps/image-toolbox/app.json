@@ -1,0 +1,38 @@
+{
+  "schema": "echoapp-app/v1",
+  "id": "app.local.image-toolbox",
+  "name": {
+    "zh-CN": "图片工具箱",
+    "en": "Image Toolbox"
+  },
+  "version": "0.2.0",
+  "category": "utility",
+  "summary": {
+    "zh-CN": "本地图片压缩、矢量化、裁剪与拼接",
+    "en": "Local image compression, vectorization, crop, and stitch"
+  },
+  "description": {
+    "zh-CN": "图片工具箱：本地完成 JPG/PNG/WEBP 压缩、位图转 SVG、裁剪与多图拼接，全程不上传服务器。支持 EchoBraid 亮/暗主题。",
+    "en": "All-local image utilities: compress JPG/PNG/WEBP, convert raster to SVG, crop, and stitch multi-image collages — no upload. Follows EchoBraid light/dark theme."
+  },
+  "tags": [
+    "image",
+    "compress",
+    "svg",
+    "crop",
+    "utility"
+  ],
+  "echo_file": "app.echo",
+  "update_source": {
+    "type": "github",
+    "repo": "launsion-boop/EchoApp",
+    "app_path": "apps/image-toolbox/app.json"
+  },
+  "min_echobraid": "2.0.0",
+  "capabilities": [
+    "clipboard",
+    "filesystem"
+  ],
+  "updated_at": "2026-05-09T00:00:00Z",
+  "changelog": "changelog.md"
+}
