@@ -2,18 +2,18 @@
   "schema": "echoapp-app/v1",
   "id": "app.local.echorec",
   "name": {
-    "zh-CN": "EchoREC",
-    "en": "EchoREC"
+    "zh-CN": "EchoLive",
+    "en": "EchoLive"
   },
-  "version": "0.2.9",
+  "version": "0.3.1",
   "category": "productivity",
   "summary": {
-    "zh-CN": "会议录音、实时转写与纪要整理",
-    "en": "Meeting recording, live transcription, and notes"
+    "zh-CN": "会议录音、实时转写与 EchoLive Agent",
+    "en": "Meeting recording, live transcription, and EchoLive Agent"
   },
   "description": {
-    "zh-CN": "EchoREC 用于会议录音、实时转写、说话人识别、逐字稿、AI 摘要和待办整理，并可通过 EchoREC Agent 查询会议内容。",
-    "en": "EchoREC records meetings, provides live transcription, speaker recognition, transcripts, AI summaries, and follow-up items, with EchoREC Agent for meeting Q&A."
+    "zh-CN": "EchoLive 用于会议录音、实时转写、说话人识别、逐字稿、AI 摘要和待办整理，并可通过 EchoLive Agent 查询会议内容。",
+    "en": "EchoLive records meetings, provides live transcription, speaker recognition, transcripts, AI summaries, and follow-up items, with EchoLive Agent for meeting Q&A."
   },
   "tags": [
     "meeting",
@@ -39,7 +39,7 @@
     "filesystem",
     "mcp"
   ],
-  "updated_at": "2026-05-08T02:30:00Z",
+  "updated_at": "2026-05-10T15:54:20Z",
   "changelog": "changelog.md",
   "color": "#ef4444",
   "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='3' width='6' height='12' rx='3' fill='currentColor' stroke='none'/><path d='M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8'/></g>"

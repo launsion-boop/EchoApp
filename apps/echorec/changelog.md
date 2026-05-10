@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-05-10
+
+- Publish the tested EchoLive package as the latest EchoREC-lineage release.
+- Replace the embedded agent panel with the new EchoLive chat bridge and styles.
+
 ## 0.2.9 - 2026-05-08
 
 - Normalize the app display name, summary, and description so catalog metadata describes product function instead of internal version labels or visual style.
