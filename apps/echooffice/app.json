@@ -5,7 +5,7 @@
     "zh-CN": "EchoOffice",
     "en": "EchoOffice"
   },
-  "version": "0.2.11",
+  "version": "0.3.32-test.20260512-skill-available-tools",
   "category": "productivity",
   "summary": {
     "zh-CN": "Office/PDF 文档预览与 AI 改写工作台",
@@ -39,8 +39,9 @@
     "app_comm",
     "mcp"
   ],
-  "updated_at": "2026-05-08T02:30:00Z",
+  "updated_at": "2026-05-12T14:44:22Z",
   "changelog": "changelog.md",
   "color": "#d45b35",
-  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 3.8h8.2l3.8 3.8v12.6h-12a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z'/><path d='M14.5 4v4h4M8 11h7M8 14h7M8 17h3.5M13.5 16h3.2M13.5 18.5h3.2'/></g>"
+  "icon_svg": "<g fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M6.5 3.8h8.2l3.8 3.8v12.6h-12a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z'/><path d='M14.5 4v4h4M8 11h7M8 14h7M8 17h3.5M13.5 16h3.2M13.5 18.5h3.2'/></g>",
+  "artifact_sha256": "647a13067200d5c1937abbd9df7e74219585e2e458aa81a8eddfb5516da109ae"
 }

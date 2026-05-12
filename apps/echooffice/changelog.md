@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.32-test.20260512-skill-available-tools - 2026-05-12
+
+- Publish the latest EchoOffice preset package with the available-tools skill update.
+- Refresh the OTA artifact checksum for Desktop update verification.
+
 ## 0.2.11 - 2026-05-08
 
 - Align the document tab strip with light and dark themes; active documents now use a bottom accent line instead of a large selected block.

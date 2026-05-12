@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.2 - 2026-05-12
+
+- Publish the latest EchoLive preset package as the current OTA release.
+- Refresh the OTA artifact checksum for Desktop update verification.
+
 ## 0.3.1 - 2026-05-10
 
 - Publish the tested EchoLive package as the latest EchoREC-lineage release.
